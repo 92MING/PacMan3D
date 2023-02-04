@@ -52,7 +52,7 @@ body, html, .App, #root, .auth-wrapper {
   border-radius: 15px;
   transition: all .3s;
   border: solid rgba(247, 244, 59, 0.852);
-border-width: 10px;
+  border-width: 10px;
 }
 .display-wrapper .form-control:focus {
   border-color: #167bff;

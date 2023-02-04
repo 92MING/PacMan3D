@@ -1,5 +1,6 @@
 import './LoginPage.css' ;
 import React, { Component, useState } from "react";
+import PopupMenu from './PopupMenu';
 function LoginPage() {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -13,6 +14,7 @@ function LoginPage() {
 
     return (
         <form  onSubmit={handleSubmit}>
+            <PopupMenu/>
             <h3>Login</h3>
             <div className="mb-3">
               <label>Email address</label>
