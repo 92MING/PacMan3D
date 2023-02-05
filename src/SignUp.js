@@ -1,4 +1,6 @@
 import React, { Component , useState} from "react";
+import './LoginPage&SignUp.css' ;
+import title_icon from './image/pacman-icon.png';
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -11,7 +13,13 @@ export default function SignUp() {
     };
 
     return (
-    <form onSubmit={handleSubmit}>
+  <div className="display-wrapper">
+     <div className='img'>
+        <img src={title_icon} width = "60%" ></img>
+      </div> 
+    <div className="display-box">
+  
+      <form onSubmit={handleSubmit}>
         <h3>Sign Up</h3>
         <div className="mb-3">
           <label>Username</label>
@@ -53,6 +61,8 @@ export default function SignUp() {
           Already registered <a href="/sign-in">Login?</a>
         </p>
       </form>
+    </div>
+  </div>
         );
     }
 
