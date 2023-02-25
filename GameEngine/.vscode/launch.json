@@ -1,0 +1,26 @@
+{
+	"version": "0.2.0",
+	"configurations": [ 
+		{
+			"name": "chrome调试",
+			"type": "chrome",
+			"request": "launch",
+			"trace": true,
+			"smartStep": true,
+			"file": "${workspaceRoot}/bin/index.html",
+			"runtimeArgs": [
+				"--allow-file-access-from-files",
+				"--allow-file-access-frome-files",
+				"--disable-web-security"
+			],
+			"sourceMaps": true,
+			"webRoot": "${workspaceRoot}",
+			"userDataDir": "${workspaceRoot}/.vscode/chrome",
+			"fixedPort":false,
+			"sourceMapPathOverrides": {
+				"src/*": "${workspaceRoot}/src/*"
+			},	
+			"preLaunchTask": "tsc"	
+		}
+	]
+}
