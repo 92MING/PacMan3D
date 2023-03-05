@@ -1,12 +1,13 @@
 import React from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import LoginPage from './LoginPage';
-import SignUp from './SignUp';
-import PopupMenu from './PopupMenu';
-import HomePage from './HomePage';
+import { BrowserRouter as Router, Routes, Route, Link, Navigate } from 'react-router-dom';
+import LoginPage from './component/Login/LoginPage';
+import SignUp from './component/signUp/SignUp';
+import PopupMenu from './component/PopUpMenu/PopupMenu';
+import HomePage from './component/HomePage/HomePage';
 function App() {
+  const user = localStorage.getItem("token");
   return (
     <Router>
       <div className="App">
@@ -14,11 +15,11 @@ function App() {
    
         
             <Routes>
-              <Route exact path="/" element={<LoginPage />} />
+              {user && <Route exact path="/" element={<HomePage />} />}
               <Route path="/sign-in" element={<LoginPage />} />
+              <Route path = "/" exact element = {<Navigate replace to = "/sign-in"/>}/>
               <Route path="/sign-up" element={<SignUp />} />
               <Route path="/popup-menu" element={<PopupMenu/>} />
-              <Route path="/home-page" element={<HomePage/>} />
             </Routes>
         
         
