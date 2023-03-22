@@ -1,5 +1,6 @@
 import './LoginPage&SignUp.css' ;
 import React, { Component, useState } from "react";
+import { Helmet } from 'react-helmet';
 import PopupMenu from './PopupMenu';
 import title_icon from './image/pacman-icon.png';
 function LoginPage() {
@@ -14,6 +15,9 @@ function LoginPage() {
 
     return (
     <div className='display-wrapper'>
+      <Helmet>
+        <title>Pac-Man Login</title>
+      </Helmet>
       <div className='img'>
         <img src={title_icon} width = "570px" ></img>
       </div> 

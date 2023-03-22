@@ -7,13 +7,11 @@ import SignUp from './SignUp';
 import PopupMenu from './PopupMenu';
 import HomePage from './HomePage';
 import ChangePassword from './ChangePassword';
+
 function App() {
   return (
     <Router>
-      <div className="App">
-        
-   
-        
+      <div className="App">       
             <Routes>
               <Route exact path="/" element={<LoginPage />} />
               <Route path="/sign-in" element={<LoginPage />} />
@@ -21,9 +19,7 @@ function App() {
               <Route path="/popup-menu" element={<PopupMenu/>} />
               <Route path="/home-page" element={<HomePage/>} />
               <Route path="/change-password" element={<ChangePassword/>}/>
-            </Routes>
-        
-        
+            </Routes>      
       </div>
     </Router>
     

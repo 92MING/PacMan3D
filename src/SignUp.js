@@ -1,6 +1,7 @@
 import React, { Component , useState} from "react";
 import './LoginPage&SignUp.css' ;
 import title_icon from './image/pacman-icon.png';
+import { Helmet } from 'react-helmet';
 export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -14,6 +15,9 @@ export default function SignUp() {
 
     return (
   <div className="display-wrapper">
+    <Helmet>
+        <title>Pac-Man Sign Up</title>
+      </Helmet>
      <div className='img'>
         <img src={title_icon} width = "60%" ></img>
       </div> 

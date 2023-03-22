@@ -1,6 +1,7 @@
 import React, { Component , useState} from "react";
 import './LoginPage&SignUp.css' ;
 import title_icon from './image/pacman-icon.png';
+import { Helmet } from 'react-helmet';
 export default function ChangePassword() {
     const [email, setEmail] = useState('');
     const [password,setPassword] = useState('');
@@ -8,11 +9,13 @@ export default function ChangePassword() {
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log(email, password) ;
-    
     };
 
     return (
   <div className="display-wrapper">
+    <Helmet>
+        <title>Pac-Man Change Password</title>
+      </Helmet>
      <div className='img'>
         <img src={title_icon} width = "60%" ></img>
       </div> 
