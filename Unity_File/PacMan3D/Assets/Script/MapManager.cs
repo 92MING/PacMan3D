@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// 怪物基類
+/// 編輯、創建、加載地圖資料
 /// </summary>
-public abstract class Monster: Character
+public class MapManager : Manager<MapManager>
 {
     
 }
