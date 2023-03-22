@@ -7,7 +7,7 @@ export default function PopupMenu(){
     
     
     return(
-        <Popup trigger={<button>Trigger</button>} modal nested>
+        <Popup trigger={<button className="home-page-btn">Trigger</button>} modal nested>
             
             <div className="home-page">
                 <button className="home-page-btn">Home page</button>
