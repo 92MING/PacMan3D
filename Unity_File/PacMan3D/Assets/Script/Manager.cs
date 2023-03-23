@@ -28,7 +28,7 @@ public class SingleManager: MonoBehaviour
 public class Manager<Cls> : SingleManager where Cls : Manager<Cls>, new()
 {
     protected static Cls _instance = null;
-    public static Cls instance 
+    public static Cls instance
     {
         get
         {
@@ -36,7 +36,11 @@ public class Manager<Cls> : SingleManager where Cls : Manager<Cls>, new()
             return _instance;
         }
     }
-
+    protected void Awake()
+    {
+        _instance = this as Cls;
+    }
+    
     public static GameObject LoadPrefab(string prefabName)
     {
         return Resources.Load<GameObject>("Prefab/" + prefabName);

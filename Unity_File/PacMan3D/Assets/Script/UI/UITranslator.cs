@@ -11,7 +11,7 @@ public class UITranslator : MonoBehaviour
     private void Awake()
     {
         _text = GetComponent<Text>();
-        UIManager.OnLanguageChanged.AddListener(OnLanguageChanged);
+        SystemManager.OnLanguageChanged.AddListener(OnLanguageChanged);
     }
 
     private void OnLanguageChanged(string lang)
