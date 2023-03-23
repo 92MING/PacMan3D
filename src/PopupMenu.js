@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import './PopupMenu.css';
+import '@arco-design/web-react/dist/css/arco.css';
+import { Button } from '@arco-design/web-react';
+
 
 export default function PopupMenu(){
     const navigate = useNavigate();
     
     return(
-        <Popup trigger={<button className="home-page-btn">Trigger</button>} modal nested>
+        <Popup trigger={<Button type='text' shape='round'>Trigger</Button>} modal nested>
            {close=>(
             <div>
             <div className="home-page" >

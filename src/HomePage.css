@@ -1,21 +1,40 @@
 
-.display_wrapper{
-    background-color: black;
-    display: flex;
-    
-    flex-direction: column;
-    text-align: center;
-    
-    height: 100%;
-
+.layout-collapse-demo { 
+    height: 100%; border: 1px solid rgb(238, 219, 98); background-color: rgb(238, 219, 98);
+} 
+.layout-collapse-demo .arco-layout-sider .logo { 
+    height: 32px; margin: 12px 8px; background: rgb(238, 219, 98);
+} 
+.layout-collapse-demo .arco-layout-sider-light .logo { 
+    background: rgba(242, 241, 230, 0); 
+} 
+.layout-collapse-demo .arco-layout-footer,
+.layout-collapse-demo .arco-layout-content { 
+    color: var(--color-white); text-align: center; font-stretch: condensed; font-size: 16px; display: flex; flex-direction: column; justify-content: center;
+} 
+.layout-collapse-demo .arco-layout-footer { 
+    color: var(--color-text-2); height: 30px; line-height: 40px; font-weight: 400; font-size: 14px;
+} 
+.layout-collapse-demo .arco-layout-content { 
+    background: var(--color-bg-3); color: var(--color-text-2); font-weight: 400; font-size: 14px;
+} 
+.layout-collapse-demo .arco-layout-header { 
+    height: 64px; line-height: 64px; background: rgb(238, 219, 98);
+} 
+.layout-collapse-demo .arco-layout-header .trigger { 
+    margin-left: 20px; background: rgb(0, 0, 0);
+}
+.div-design{
+    align-content: space-between;
+    padding: 40px 0;
+    text-align: left;
+    height: 50px;
+    width: 100%;
+    border-radius: 0px;
+}
+.menu{
+    background: rgb(241, 244, 202);
+}
+.t-btn{
+    border-style: none;
   }
-.start-game{
-    align-content: center;
-    padding: 60px 10px 30px 10px;
-    text-align: center;
-
-}
-.start-game-btn{
-    width: 300px;
-
-}
