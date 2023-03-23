@@ -7,6 +7,9 @@ import SignUp from './SignUp';
 import PopupMenu from './PopupMenu';
 import HomePage from './HomePage';
 import ChangePassword from './ChangePassword';
+import CreateMap from './CreateMap';
+import MapMenu from './MapMenu'
+import OnlineForum from './OnlineForum'
 
 function App() {
   return (
@@ -19,6 +22,9 @@ function App() {
               <Route path="/popup-menu" element={<PopupMenu/>} />
               <Route path="/home-page" element={<HomePage/>} />
               <Route path="/change-password" element={<ChangePassword/>}/>
+              <Route path="/home-page/create-map" element={<CreateMap/>}/>
+              <Route path="/home-page/map-menu" element={<MapMenu/>}/>
+              <Route path="/home-page/online-forum" element={<OnlineForum/>}/>              
             </Routes>      
       </div>
     </Router>

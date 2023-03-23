@@ -9,6 +9,7 @@ import pacman1 from './image/pacman.png';
 import React from 'react';
 import { Layout, Menu, Breadcrumb, Button, Message } from '@arco-design/web-react';
 import { IconCaretRight, IconCaretLeft, IconPalette, IconTrophy, IconStorage, IconUserGroup, IconThunderbolt} from '@arco-design/web-react/icon';
+import { Switch } from 'antd';
 
 const MenuItem = Menu.Item;
 const Sider = Layout.Sider;
@@ -20,6 +21,10 @@ class App extends React.Component {
   state = {
     collapsed: false,
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+    }}
   handleCollapsed = () => {
     this.setState({
       collapsed: !this.state.collapsed,
@@ -49,7 +54,7 @@ class App extends React.Component {
             <div className='div-design'>
             <MenuItem key='0_1'style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconTrophy />
-              <Button type='text' className='t-btn' shape='round'>
+              <Button type='text' className='t-btn' shape='round' href='/home-page/'>              
               Start Game
               </Button>
             </MenuItem>
@@ -57,7 +62,7 @@ class App extends React.Component {
             <div className='div-design'>
             <MenuItem key='0_2'style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconPalette />
-              <Button type='text' className='t-btn' shape='round'>
+              <Button type='text' className='t-btn' shape='round' href='/home-page/create-map'>
               Create Map
               </Button>
             </MenuItem>
@@ -65,7 +70,7 @@ class App extends React.Component {
             <div className='div-design'>
             <MenuItem key='0_3' style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconStorage />
-              <Button type='text' className='t-btn' shape='round'>
+              <Button type='text' className='t-btn' shape='round' href='/home-page/map-menu'>
               Map Menu
               </Button>
             </MenuItem>
@@ -74,7 +79,7 @@ class App extends React.Component {
            <div  className='div-design'>
             <MenuItem key='0_4' style={{backgroundColor:"rgb(238, 219, 98)"}}> 
               <IconUserGroup />
-              <Button type='text' className='t-btn' shape='round'>
+              <Button type='text' className='t-btn' shape='round' href='/home-page/online-forum'>
               Online Forum
               </Button>
             </MenuItem>
@@ -98,7 +103,11 @@ class App extends React.Component {
             </div>
           </Header>
           <Layout style={{ padding: '0 24px' }}>
-            <Content style={{ margin: '16px 0' }}>Content</Content>
+            <Content style={{ margin: '16px 0' }}>
+          
+            content
+          
+            </Content>
             <Footer>CSCI3100 ©2023 Created by Group F4</Footer>
           </Layout>
         </Layout>
