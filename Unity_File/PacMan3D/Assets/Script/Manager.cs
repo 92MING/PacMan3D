@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-public class SingleManager: MonoBehaviour {
-
+public class SingleManager: MonoBehaviour 
+{
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     private static void OnBeforeSceneLoadRuntimeMethod()
     {
@@ -28,8 +28,10 @@ public class SingleManager: MonoBehaviour {
 public class Manager<Cls> : SingleManager where Cls : Manager<Cls>, new()
 {
     protected static Cls _instance = null;
-    public static Cls instance {
-        get{
+    public static Cls instance 
+    {
+        get
+        {
             if (_instance is null) _instance = new Cls();
             return _instance;
         }

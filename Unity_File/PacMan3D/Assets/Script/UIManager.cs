@@ -9,11 +9,12 @@ using UnityEngine.Events;
 /// 管理UI
 /// </summary>
 [Serializable]
-public class UIManager :Manager<UIManager>
+public class UIManager : Manager<UIManager>
 {
     private GameObject _UIPrefab;
     private Canvas _canvas;
     public static UnityEvent<string> OnLanguageChanged = new UnityEvent<string>();
+    
     private void Awake()
     {
         _UIPrefab = UIManager.LoadPrefab("UIPrefab");

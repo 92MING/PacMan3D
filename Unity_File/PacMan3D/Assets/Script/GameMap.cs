@@ -7,8 +7,10 @@ public enum MapComponentType
 {
     NULL, EMPTY, OBJECT, MONSTER, PLAYER
 }
+
 [System.Serializable]
-public class MapComponent {
+public class MapComponent 
+{
     public MapComponentType type;
     public string className;
 }

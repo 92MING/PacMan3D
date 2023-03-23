@@ -9,7 +9,8 @@ public abstract class MapObject : MonoBehaviour
     private static Dictionary<string, Type> MapObjClasses = new Dictionary<string, Type>();
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    public static void GetAllMapObjectClass(){
+    public static void GetAllMapObjectClass()
+    {
         foreach (var clsType in Assembly.GetExecutingAssembly().GetTypes())
         {
             if (clsType.IsSubclassOf(typeof(MapObject)) && !clsType.IsAbstract)
@@ -18,6 +19,7 @@ public abstract class MapObject : MonoBehaviour
             }
         }
     }
+    
     public static MapObject CreateMapObject(string name, Vector3 pos, Vector2 direction)
     {
         if (MapObjClasses.ContainsKey(name))
