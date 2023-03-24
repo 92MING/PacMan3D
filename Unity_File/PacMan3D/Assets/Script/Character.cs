@@ -1,38 +1,79 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Reflection;
+using System;
+
+public enum CharacterAnimation
+{
+    IDLE,
+    WALK_FRONT,
+    WALK_BACK,
+    WALK_LEFT,
+    WALK_RIGHT,
+    ATK,
+    SKILL,
+    SENSE,
+    GET_HIT,
+    STUN,
+    DIE,
+    VICTORY,
+}
 
 /// <summary>
 /// 角色基類
 /// </summary>
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody))]
 [System.Serializable]
 public abstract class Character: MonoBehaviour
 {
+    public static LinkedList<Type> AllCharacterType = new LinkedList<Type>();
+    public static Dictionary<string, GameObject> AllCharacterPrefab = new Dictionary<string, GameObject>();
+
     public abstract int maxHP { get; }
     public abstract int maxAttack { get; }
     public abstract int maxDefence { get; }
     public abstract int maxSpeed { get; }
 
-    private int _hp;
+    protected int _hp;
     public int hp => _hp;
-    private int _attack;
+    protected int _attack;
     public int attack => _attack;
-    private int _defence;
+    protected int _defence;
     public int defence => _defence;
-    private int _speed;
+    protected int _speed;
     public int speed => _speed;
-    private Rigidbody2D _rigidbody;
+    protected Rigidbody _rigidbody;
+    protected Animator _animator;
 
     void Awake()
     {
         if (!TryGetComponent(out _rigidbody))
         {
-            _rigidbody = new Rigidbody2D();
+            _rigidbody = gameObject.AddComponent<Rigidbody>();
         }
+        _animator = GetComponentInChildren<Animator>();
         _hp = maxHP;
         _attack = maxAttack;
         _defence = maxDefence;
         _speed = maxSpeed;
+    }
+
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    private static void LoadAllCharacterType()
+    {
+        foreach (var clsType in Assembly.GetExecutingAssembly().GetTypes())
+        {
+            if (clsType.IsSubclassOf(typeof(Character)) && !clsType.IsAbstract)
+            {
+                AllCharacterType.AddLast(clsType);
+                AllCharacterPrefab.Add(clsType.Name, GameManager.LoadPrefab(clsType.Name));
+            }
+        }
+    }
+
+    protected void switchAnimation(CharacterAnimation ani)
+    {
+        _animator.SetInteger("state", (int)ani);
     }
 }

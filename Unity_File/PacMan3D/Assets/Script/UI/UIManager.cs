@@ -29,6 +29,7 @@ public class UIManager : Manager<UIManager>
     private Stack<UIPages> _pageRecord = new Stack<UIPages>();
 
     public static UIPages currentPage => instance._pageRecord.Peek();
+    public static UIPages secondCurrentPage => instance._pageRecord.Count > 1 ? instance._pageRecord.ToArray()[1] : UIPages.MAIN_PAGE;
     public static MainPage mainPage;
     public static Player_AI_Page playerAIPage;
     public static Player_Player_Page playerPlayerPage;
@@ -100,27 +101,13 @@ public class UIManager : Manager<UIManager>
                 return null;
         }
     }
-    private enum SwitchMode
+    public enum SwitchMode
     {
-        ENTER, EXIT, RETURN, RETURN_EXIT
+        ENTER, EXIT, RETURN, RETURN_EXIT, NULL
     }
     private static void _switchPage(UIPage page, SwitchMode mode)
     {
         var rectTransform = page.GetComponent<RectTransform>();
-        var originPos = rectTransform.position;
-
-        if (mode == SwitchMode.RETURN_EXIT || mode == SwitchMode.EXIT)
-        {
-            page.OnExit.Invoke();
-        }
-        else if (mode == SwitchMode.ENTER)
-        {
-            page.OnEnter.Invoke();
-        }
-        else
-        {
-            page.OnComeBack.Invoke();
-        }
 
         var start = new Vector3(mode == SwitchMode.RETURN ? -0.5f : mode == SwitchMode.ENTER ? 1.5f : 0.5f, 0.5f, rectTransform.position.z);
         var end = new Vector3(mode == SwitchMode.EXIT ? -0.5f : mode==SwitchMode.RETURN_EXIT? 1.5f: 0.5f, 0.5f, rectTransform.position.z);
@@ -134,17 +121,33 @@ public class UIManager : Manager<UIManager>
         if (mode != SwitchMode.EXIT) page.setVisible(true);
         returnButton.interactable = false;
 
-
+        if (mode == SwitchMode.ENTER)
+        {
+            page.OnEnter.Invoke();
+        }
+        else
+        {
+            page.OnComeBack.Invoke();
+        }
+        page.switchMode = mode;
+        
         var ani = DOTween.To(() => pos, x => pos = x, end, 1.0f);
         ani.OnUpdate(() =>
         {
             rectTransform.position = pos;
-            //rectTransform.ForceUpdateRectTransforms();
+            var progress = Math.Abs(pos.x - start.x) / Math.Abs(end.x - start.x);
+            page.OnSwitching.Invoke(progress);
         });
         ani.OnComplete(() =>
         {
             page.setVisible(mode == SwitchMode.EXIT ? false : true);
+            page.OnSwitching.Invoke(1.0f);
+            page.switchMode = SwitchMode.NULL;
             returnButton.interactable = true;
+            if (mode == SwitchMode.RETURN_EXIT || mode == SwitchMode.EXIT)
+            {
+                page.OnExit.Invoke();
+            }
         });
 
 

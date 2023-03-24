@@ -5,9 +5,12 @@ using UnityEngine.Events;
 
 public abstract class UIPage : MonoBehaviour
 {
+    public UIManager.SwitchMode switchMode = UIManager.SwitchMode.NULL;
+
     public UnityEvent OnEnter = new UnityEvent();
     public UnityEvent OnExit = new UnityEvent();
     public UnityEvent OnComeBack = new UnityEvent();
+    public UnityEvent<float> OnSwitching = new UnityEvent<float>();
 
     private CanvasGroup _canvasGroup;
     protected void Awake()
