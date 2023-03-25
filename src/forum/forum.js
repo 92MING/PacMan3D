@@ -1,7 +1,8 @@
 import { Tabs, Typography } from '@arco-design/web-react';
-import { IconCalendar, IconClockCircle, IconUser, IconUpload, IconBook } from '@arco-design/web-react/icon';
+import { IconUpload, IconBook, IconUser } from '@arco-design/web-react/icon';
 import Blog from './Blog';
 import Upload from './own_blog'
+import MyBlog from './myblog'
 import './forum.css'
 const TabPane = Tabs.TabPane;
 const style = {
@@ -33,6 +34,17 @@ const App = () => {
         }
       >
         <Typography.Paragraph style={style}><Upload/></Typography.Paragraph>
+      </TabPane>
+      <TabPane
+        key='3'
+        title={
+          <span>
+            <IconUser style={{ marginRight: 6 }} />
+            My Blog
+          </span>
+        }
+      >
+        <Typography.Paragraph style={style}><MyBlog/></Typography.Paragraph>
       </TabPane>
     </Tabs>
   );

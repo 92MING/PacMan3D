@@ -108,18 +108,25 @@ function App() {
         onValuesChange={onValuesChange}
         scrollToFirstError
       >
+        <FormItem label='Title' field='title' rules={[{required:true}]}>
+        <Input
+          maxLength={{ length: 30, errorOnly: true }}
+          showWordLimit
+          defaultValue='More than 30 letters will be error'
+        />
+        </FormItem>
         <FormItem label='Blog' field='blog' rules={[{ required: true }]}>
         <Input.TextArea
           autoSize
           maxLength={{ length: 9999, errorOnly: true }}
           showWordLimit
           placeholder='Put your idea here. No MORE THAN 9999 LETTERS.'
-          style={{ minHeight:300 }}
+          style={{ minHeight:280 }}
         />
         </FormItem>
         <FormItem
           label='Add Your Tag'
-          field='a.b[0].c'
+          field='tag'
           rules={[{ type: 'array', minLength: 1 }]}
         >
          <InputTag
