@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CharacterPage : UIPage
 {
@@ -8,6 +9,15 @@ public class CharacterPage : UIPage
     private static Vector3 CharacterRightPos = new Vector3(8, 0, -6);
     private static Vector3 CharacterMiddlePos = new Vector3(-2.5f, 0, -6);
     private static Vector3 CharacterLeftPos = new Vector3(-8, 0, -6);
+
+    [SerializeField] private Text hpText;
+    [SerializeField] private Text atkText;
+    [SerializeField] private Text defText;
+    [SerializeField] private Text spdText;
+    [SerializeField] private Text nameText;
+
+    [SerializeField] private Button prevCharacterButton;
+    [SerializeField] private Button nextCharacterButton;
 
     private void Awake()
     {
@@ -18,9 +28,17 @@ public class CharacterPage : UIPage
     {
         OnEnter.AddListener(() =>
         {
-            if (_showingCharacter is null)
-                _showingCharacter = Instantiate(Character.AllCharacterPrefab[Character.AllCharacterType.First.Value.Name]);
+            var firstCharacterType = Character.AllCharacterType.First.Value;
+            if (_showingCharacter is null) {
+                _showingCharacter = Instantiate(Character.AllCharacterPrefab[firstCharacterType.Name]);
+            }
             _showingCharacter.transform.position = CharacterRightPos;
+            var characterComponent = _showingCharacter.GetComponent<Character>();
+            hpText.text = characterComponent.maxHP.ToString();
+            atkText.text = characterComponent.maxAttack.ToString();
+            defText.text = characterComponent.maxDefence.ToString();
+            spdText.text = characterComponent.maxSpeed.ToString();
+            nameText.text = firstCharacterType.Name;
         });
         OnSwitching.AddListener((progress) =>
         {
@@ -34,5 +52,10 @@ public class CharacterPage : UIPage
             Destroy(_showingCharacter);
             _showingCharacter = null;
         });
+    }
+
+    public static void switchCharacter()
+    {
+        //TODO
     }
 }

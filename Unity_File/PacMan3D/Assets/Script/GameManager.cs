@@ -31,7 +31,7 @@ public class GameManager: Manager<GameManager>
         gameObject.AddComponent<StandaloneInputModule>();
     }
 
-    public static void Play(GameMap map)
+    public static void Play(GameMap map, Character character)
     {
         if (IsPlaying)
         {

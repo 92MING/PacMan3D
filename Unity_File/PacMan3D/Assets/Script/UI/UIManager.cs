@@ -27,7 +27,7 @@ public class UIManager : Manager<UIManager>
     private Canvas _canvas;
     private CanvasGroup _canvasGroup;
     private Stack<UIPages> _pageRecord = new Stack<UIPages>();
-
+        
     public static UIPages currentPage => instance._pageRecord.Peek();
     public static UIPages secondCurrentPage => instance._pageRecord.Count > 1 ? instance._pageRecord.ToArray()[1] : UIPages.MAIN_PAGE;
     public static MainPage mainPage;
@@ -49,18 +49,13 @@ public class UIManager : Manager<UIManager>
         _canvas = obj.GetComponent<Canvas>();
         _canvasGroup = obj.GetComponent<CanvasGroup>();
         returnButton = obj.transform.Find("return").GetComponent<Button>();
+        foreach (Transform child in obj.transform)
+        {
+            child.gameObject.SetActive(true);
+        }
     }
     void Start()
     {
-        mainPage.gameObject.SetActive(true);
-        playerAIPage.gameObject.SetActive(true);
-        playerPlayerPage.gameObject.SetActive(true);
-        characterPage.gameObject.SetActive(true);
-        mapEditPage.gameObject.SetActive(true);
-        settingPage.gameObject.SetActive(true);
-        honorPage.gameObject.SetActive(true);
-        aboutPage.gameObject.SetActive(true);
-
         playerAIPage.setVisible(false);
         playerPlayerPage.setVisible(false);
         characterPage.setVisible(false);
@@ -118,7 +113,7 @@ public class UIManager : Manager<UIManager>
         end.y *= screen.y;
         var pos = start;
         rectTransform.position = pos;
-        if (mode != SwitchMode.EXIT) page.setVisible(true);
+        if (mode != SwitchMode.EXIT && mode != SwitchMode.RETURN_EXIT) page.setVisible(true);
         returnButton.interactable = false;
 
         if (mode == SwitchMode.ENTER)
@@ -147,6 +142,7 @@ public class UIManager : Manager<UIManager>
             if (mode == SwitchMode.RETURN_EXIT || mode == SwitchMode.EXIT)
             {
                 page.OnExit.Invoke();
+                page.setVisible(false);
             }
         });
 
