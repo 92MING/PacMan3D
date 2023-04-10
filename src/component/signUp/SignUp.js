@@ -20,7 +20,7 @@ export default function SignUp() {
         setPasswordsMatch(confirmPassword === password);
       }, [confirmPassword, password]);
   
-  const url = 'http://localhost:8080/register'; 
+  const url = 'http://localhost:8080/signup'; 
   const registerUser = async (e) => {
     e.preventDefault();
     if (!passwordsMatch) {
@@ -37,12 +37,13 @@ export default function SignUp() {
       return;
     }
     try {
+      //connect to database
       const res = await axios.post(url, {
         username,
         email,
         password,
       });
-      if (res.data === "exist") {
+      if (res.data.isCreated ) {
         toast.warn('User has been registered!', {
           position: "top-center",
           autoClose: 1000,
