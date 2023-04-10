@@ -26,7 +26,8 @@ public class MapManager : Manager<MapManager>
         var mapJsons = Resources.LoadAll<TextAsset>("Map");
         foreach (var mapJson in mapJsons)
         {
-            LoadMapFromJson(mapJson.text);
+            var map = LoadMapFromJson(mapJson.text);
+            Debug.Log(string.Format("done load map:{0}", map.name));
         }
     }
 

@@ -8,10 +8,15 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class GameManager: Manager<GameManager>
 {
-    private bool _isPlaying = false;
     [SerializeField] private Color32 _cameraBackgroundColor = new Color32(143, 187, 255, 255);
-    public static bool IsPlaying => instance._isPlaying;
-    public static Camera gameCamera;
+    
+    private static bool _isPlaying = false;
+    public static bool IsPlaying => _isPlaying; //是否在遊戲中（停止或進行中均為true）
+    private static bool _isPaused = false;
+    public static bool IsPaused => _isPaused; //是否暫停
+
+    public static Camera gameCamera; // 遊戲目前主相機
+    public static Character playerCharacter; // 玩家控制中的角色
 
     private void Awake()
     {
