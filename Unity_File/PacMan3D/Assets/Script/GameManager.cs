@@ -38,5 +38,21 @@ public class GameManager: Manager<GameManager>
             Debug.LogWarning("Game is already playing");
             return;
         }
+        // TODO
+    }
+
+    public static void Pause()
+    {
+        if (!IsPlaying)
+        {
+            Debug.LogWarning("Game is not playing");
+            return;
+        }
+        // TODO
+    }
+
+    public static void EnterMapEditMode(GameMap map)
+    {
+        
     }
 }

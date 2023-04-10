@@ -19,6 +19,10 @@ public class SingleManager: MonoBehaviour
             }
         }
     }
+    public static GameObject LoadPrefab(string prefabName)
+    {
+        return Resources.Load<GameObject>("Prefab/" + prefabName);
+    }
 }
 
 /// <summary>
@@ -39,10 +43,5 @@ public class Manager<Cls> : SingleManager where Cls : Manager<Cls>, new()
     protected void Awake()
     {
         _instance = this as Cls;
-    }
-    
-    public static GameObject LoadPrefab(string prefabName)
-    {
-        return Resources.Load<GameObject>("Prefab/" + prefabName);
-    }
+    }  
 } 
