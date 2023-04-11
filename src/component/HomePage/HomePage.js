@@ -56,7 +56,7 @@ export default function HomePage()  {
           className='menu'
         >
           <div className='user-info'>
-            <FaUserCircle fontSize={45} color='black'/>
+            <FaUserCircle fontSize={45} color='#cc0000'/>
             <h5 className = 'user-text' >{user}</h5>
               {collapsed ?  <button className='logout-btn' onClick= {handleLogoutClick} > 
                                   <BiLogOut fontSize={20}/>
