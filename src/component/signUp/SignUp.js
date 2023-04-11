@@ -20,13 +20,13 @@ export default function SignUp() {
         setPasswordsMatch(confirmPassword === password);
       }, [confirmPassword, password]);
   
-  const url = 'http://localhost:8080/signup'; 
+  const url = 'http://localhost:3000/api/user/signup'; 
   const registerUser = async (e) => {
     e.preventDefault();
     if (!passwordsMatch) {
       toast.warn('Password does not match!', {
         position: "top-center",
-        autoClose: 1000,
+        autoClose: 400,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
@@ -44,32 +44,32 @@ export default function SignUp() {
         password,
       });
       if (res.data.isCreated ) {
-        toast.warn('User has been registered!', {
-          position: "top-center",
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-          });
-
-      } else {
         toast.success('User created!', {
           position: "top-center",
-          autoClose: 1000,
+          autoClose: 400,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
           theme: "light",
-          });
-          
+        });
         setUser(username);
         localStorage.setItem("username", username);
         navigate("/home-page");
+        
+        } else {
+          toast.warn('User has been registered!', {
+            position: "top-center",
+            autoClose: 400,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            });
+          
       }
     } catch (e) {
       console.error(e);

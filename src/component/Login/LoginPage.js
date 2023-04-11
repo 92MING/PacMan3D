@@ -37,17 +37,16 @@ export default function LoginPage() {
 
   const Login = async (e) => {
     e.preventDefault();
-    const url = "http://localhost:8080/login";
+    const url = "http://localhost:3000/api/user/login";
     console.log('Email:', email);
     console.log('Password:', password);
-    try {
-      await axios.post(url, { email, password })
+    await axios.post(url, { email, password })
       .then(res => { 
-        if (res.data.message === "Login successful") {
+        if (res.data.isLogin) {
           setUser(res.data.username);
           console.log("username is ",res.data.username)
           localStorage.setItem("username", res.data.username);
-          
+    
           if (rememberMe) {
             localStorage.setItem('email', email);
             localStorage.setItem('password', password);
@@ -59,7 +58,7 @@ export default function LoginPage() {
           }
           toast.success("Login successful!", {
             position: "top-center",
-            autoClose: 1000, // Time to close the alert in milliseconds
+            autoClose: 400, // Time to close the alert in milliseconds
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -67,10 +66,11 @@ export default function LoginPage() {
             progress: undefined,
           });
           navigate("/home-page");
-        } else {
+
+        } else if(res.data.isLogin == false) {
           toast.error('Invaild Email or Password!', {
             position: "top-center",
-            autoClose: 1000,
+            autoClose: 400,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -84,7 +84,7 @@ export default function LoginPage() {
       .catch((e) => {
         toast.error('Invaild Email or Password!', {
           position: "top-center",
-          autoClose: 1000,
+          autoClose: 400,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -94,9 +94,7 @@ export default function LoginPage() {
           });
         console.log(e);
       })
-    } catch(e) {
-      console.log(e)
-    }
+
   };
 
   const handleRememberMeChange = (event) => {

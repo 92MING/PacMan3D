@@ -4,20 +4,54 @@ import title_icon from '../../image/pacman-icon.png';
 import { Helmet } from 'react-helmet';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function SendEmail() {
     const [email, setEmail] = useState('');
     const navigate = useNavigate();
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-          await axios.post("http://localhost:8080/password-recovery-email", { email });
-          alert("Email sent");
-          navigate('/sign-in');
-        } catch (e) {
-          alert("Failed to send email");
-          console.log(e);
-        }
+        const url = "http://localhost:3000/api/user/send-email";
+        
+        await axios.post(url,  {email})
+        .then((res)=>{
+            if(res.data.isSent){
+              toast.success("Email sent", {
+                position: "top-center",
+                autoClose: 400, // Time to close the alert in milliseconds
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+              navigate('/sign-in');
+            }
+            else{
+              toast.error("Failed to send email", {
+                position: "top-center",
+                autoClose: 400, // Time to close the alert in milliseconds
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+          }
+        }).catch((e)=>{
+          toast.error("Account not found!", {
+            position: "top-center",
+            autoClose: 400, // Time to close the alert in milliseconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        
+        });
+         
       };
 
     return (

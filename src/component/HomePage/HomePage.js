@@ -10,7 +10,8 @@ import { Layout, Menu, Breadcrumb, Button, Message } from '@arco-design/web-reac
 import { IconCaretRight, IconCaretLeft, IconPalette, IconTrophy, IconStorage, IconUserGroup, IconThunderbolt, IconUser } from '@arco-design/web-react/icon';
 import { AuthContext,useAuth } from '../AuthContext';
 import { toast } from "react-toastify";
-
+import { FaUserCircle } from "react-icons/fa";
+import {BiLogOut} from "react-icons/bi";
 const MenuItem = Menu.Item;
 const Sider = Layout.Sider;
 const Header = Layout.Header;
@@ -33,7 +34,7 @@ export default function HomePage()  {
     handleLogout();
     toast.success('Logged out successfully', {
       position: "top-center",
-      autoClose: 500,
+      autoClose: 400,
       hideProgressBar: false,
       closeOnClick: true,
       pauseOnHover: true,
@@ -55,9 +56,16 @@ export default function HomePage()  {
           className='menu'
         >
           <div className='user-info'>
-            <IconUser fontSize={40} background-color='red'/>
-            <h5 style={{fontSize: "20px"}}>{user}</h5>
-            <button className='logout-btn' onClick= {handleLogoutClick}>Logout</button>
+            <FaUserCircle fontSize={45} color='black'/>
+            <h5 className = 'user-text' >{user}</h5>
+              {collapsed ?  <button className='logout-btn' onClick= {handleLogoutClick} > 
+                                  <BiLogOut fontSize={20}/>
+                            </button>: 
+               <button className='logout-btn-normal' onClick= {handleLogoutClick} > 
+                  <BiLogOut fontSize={28} style={{ marginRight: '2px' }}/> 
+                  Logout
+               </button>
+               }
           </div>
           <Menu
             defaultOpenKeys={['1']}
@@ -65,6 +73,7 @@ export default function HomePage()  {
             style={{ width: '100%'}}
             className='menu'
           >
+         
             <div className='div-design'>
             <MenuItem key='0_1'style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconTrophy />

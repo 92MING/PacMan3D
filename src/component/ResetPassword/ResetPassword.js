@@ -4,8 +4,7 @@ import title_icon from '../../image/pacman-icon.png';
 import { Helmet } from 'react-helmet';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Alert from '@mui/material/Alert';
-import AlertTitle from '@mui/material/AlertTitle';
+import { toast } from "react-toastify";
 
 export default function ResetPassword() {
     const [email, setEmail] = useState('');
@@ -14,22 +13,40 @@ export default function ResetPassword() {
     const navigate = useNavigate();
     const handleSubmit = async (e) => {
       e.preventDefault();
-      try {
-        const response = await axios.post("http://localhost:8080/reset-password", {
-          email: email,
-          oldPassword: oldPassword,
-          newPassword: newPassword
-        });
-       
-        <Alert severity="error">
-        <AlertTitle>Error</AlertTitle>
-        This is an error alert — <strong>check it out!</strong>
-      </Alert>
-        navigate('/sign-in');
-      } catch (e) {
-        alert("Failed to reset password");
+      const url = 'http://localhost:3000/api/user/reset'
+      await axios.post(url, {
+                          email: email,
+                          oldPassword: oldPassword,
+                          newPassword: newPassword
+                        })
+      .then(res => { 
+        if (res.data.isReset) {
+          toast.success("Password Reset Successful!", {
+            position: "top-center",
+            autoClose: 500, // Time to close the alert in milliseconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+          navigate('/sign-in');
+        }
+        else{
+          toast.error("Password does not match!", {
+            position: "top-center",
+            autoClose: 1000, // Time to close the alert in milliseconds
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        }
+      })
+      .catch((e) => {
         console.log(e);
-      }
+      })
     };
 
     return (
