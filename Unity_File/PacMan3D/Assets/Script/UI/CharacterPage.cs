@@ -28,12 +28,12 @@ public class CharacterPage : UIPage
     {
         OnEnter.AddListener(() =>
         {
-            var firstCharacterType = Character.AllCharacterType.First.Value;
+            var firstCharacterType = CharacterBase.AllCharacterType.First.Value;
             if (_showingCharacter is null) {
-                _showingCharacter = Instantiate(Character.AllCharacterPrefab[firstCharacterType.Name]);
+                _showingCharacter = Instantiate(ResourcesManager.GetPrefab(firstCharacterType.Name));
             }
             _showingCharacter.transform.position = CharacterRightPos;
-            var characterComponent = _showingCharacter.GetComponent<Character>();
+            var characterComponent = _showingCharacter.GetComponent<CharacterBase>();
             hpText.text = characterComponent.maxHP.ToString();
             atkText.text = characterComponent.maxAttack.ToString();
             defText.text = characterComponent.maxDefence.ToString();

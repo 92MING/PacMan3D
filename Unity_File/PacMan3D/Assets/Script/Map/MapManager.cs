@@ -17,7 +17,7 @@ public class MapManager : Manager<MapManager>
     public static float mapScale = 2; //length scale to each cell
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    private static void OnGameStart()
+    private static void LoadAllLocalMaps()
     {
         // 'Map' gameObj for containing all map cells
         _mapObj = new GameObject("Map");
@@ -27,7 +27,6 @@ public class MapManager : Manager<MapManager>
         foreach (var mapJson in mapJsons)
         {
             var map = LoadMapFromJson(mapJson.text);
-            Debug.Log(string.Format("done load map:{0}", map.name));
         }
     }
 

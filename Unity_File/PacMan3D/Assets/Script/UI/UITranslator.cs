@@ -11,6 +11,7 @@ public class UITranslator : MonoBehaviour
     [SerializeField] private string _defaultText;
     [SerializeField] private string _beforeWord;
     [SerializeField] private string _afterWord;
+    
     private void Awake()
     {
         _text = GetComponent<Text>();
@@ -18,10 +19,10 @@ public class UITranslator : MonoBehaviour
     }
     private void Start()
     {
-        OnLanguageChanged(null);
+        OnLanguageChanged(SystemManager.currnetLanguage);
     }
 
-    private void OnLanguageChanged(string lang)
+    private void OnLanguageChanged(Language lang)
     {
         if (!SystemManager.TryGetTranslation(_key, out string translation)){
             if (_defaultText != null && _defaultText != "")

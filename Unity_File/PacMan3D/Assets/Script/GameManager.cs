@@ -16,7 +16,7 @@ public class GameManager: Manager<GameManager>
     public static bool IsPaused => _isPaused; //是否暫停
 
     public static Camera gameCamera; // 遊戲目前主相機
-    public static Character playerCharacter; // 玩家控制中的角色
+    public static CharacterBase playerCharacter; // 玩家控制中的角色
 
     private void Awake()
     {
@@ -36,7 +36,7 @@ public class GameManager: Manager<GameManager>
         gameObject.AddComponent<StandaloneInputModule>();
     }
 
-    public static void Play(GameMap map, Character character)
+    public static void Play(GameMap map, CharacterBase playerCharacter)
     {
         if (IsPlaying)
         {

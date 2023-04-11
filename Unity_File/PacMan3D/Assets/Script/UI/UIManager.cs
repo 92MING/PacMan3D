@@ -43,7 +43,7 @@ public class UIManager : Manager<UIManager>
     void Awake()
     {
         base.Awake();
-        _UIPrefab = UIManager.LoadPrefab("UIPrefab");
+        _UIPrefab = ResourcesManager.GetPrefab("UIPrefab");
         var obj = Instantiate(_UIPrefab);
         obj.name = "UI";
         _canvas = obj.GetComponent<Canvas>();
