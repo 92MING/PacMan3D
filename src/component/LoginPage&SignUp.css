@@ -26,7 +26,7 @@
   margin-top: 1.5em;
   border-radius: 15px;
   transition: all .3s;
-  border: solid rgba(247, 244, 59, 0.852);
+  border: solid #fbd504;
   border-width: 10px;
 }
 .display-box-login{
@@ -39,7 +39,7 @@
   margin-top: 1.9em;
   border-radius: 15px;
   transition: all .3s;
-  border: solid rgba(247, 244, 59, 0.852);
+  border: solid #fbd504;
   border-width: 10px;
 }
 .mb-3{

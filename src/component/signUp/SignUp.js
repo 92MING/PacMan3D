@@ -72,6 +72,16 @@ export default function SignUp() {
           
       }
     } catch (e) {
+      toast.error('Server is down!', {
+        position: "top-center",
+        autoClose: 400,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        });
       console.error(e);
     }
   };

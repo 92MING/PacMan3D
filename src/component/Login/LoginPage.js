@@ -46,7 +46,7 @@ export default function LoginPage() {
           setUser(res.data.username);
           console.log("username is ",res.data.username)
           localStorage.setItem("username", res.data.username);
-    
+          
           if (rememberMe) {
             localStorage.setItem('email', email);
             localStorage.setItem('password', password);
@@ -82,7 +82,7 @@ export default function LoginPage() {
 
       })
       .catch((e) => {
-        toast.error('Invaild Email or Password!', {
+        toast.error('Server is down!', {
           position: "top-center",
           autoClose: 400,
           hideProgressBar: false,

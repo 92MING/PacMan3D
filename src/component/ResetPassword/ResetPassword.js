@@ -94,7 +94,7 @@ export default function ResetPassword() {
                   />
                 </div>
                 <div className="d-grid">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" style={{marginTop: '10px'}} className="btn btn-primary">
                     Reset Password
                   </button>
                 </div>
