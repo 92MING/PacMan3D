@@ -38,8 +38,8 @@ function App() {
   const formRef = useRef();
   const [size, setSize] = useState('default');
   const { user } = useContext(AuthContext);
-  const [title, setTitle] = useState('');
-  const [blog, setContent] = useState('');
+  const [blog_title, setTitle] = useState('');
+  const [blog_content, setContent] = useState('');
 
   useEffect(() => {
     formRef.current.setFieldsValue({
@@ -50,6 +50,7 @@ function App() {
   const onValuesChange = (changeValue, values) => {
     console.log('onValuesChange: ', changeValue, values);
   };
+
 
   const navigate = useNavigate();
 
@@ -84,7 +85,7 @@ function App() {
           maxLength={{ length: 30, errorOnly: true }}
           showWordLimit
           defaultValue='More than 30 letters will be error'
-          onChange={e=>setTitle(e.target)}
+          onChange={(blog_title,e)=>setTitle(e.target.value)}
         />
         </FormItem>
         <FormItem label='Blog' field='blog' rules={[{
@@ -102,7 +103,7 @@ function App() {
           showWordLimit
           placeholder='Put your idea here. No MORE THAN 9999 LETTERS.'
           style={{ minHeight:280 }}
-          onChange={e=>setContent(e.target)}
+          onChange={(blog_content,e)=>setContent(e.target.value)}
         />
         </FormItem>
         
@@ -119,9 +120,12 @@ function App() {
                   return;
                 }
               }
+              console.log('title: ', blog_title);
+              console.log('blog: ', blog_content);
+              console.log('user: ', user);
               const url="http://localhost:3000/api/blog/add"
               try{
-                const res = await axios.post(url, { title, blog, user });
+                const res = await axios.post(url, { blog_title, blog_content, user });
                 if (res.data.isCreated ) {
                   <div>
                   <Result
