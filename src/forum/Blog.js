@@ -11,6 +11,8 @@ const App = () => {
   const[blogList, setBlogList] = useState([]);
   const [visible2, setVisible2] = React.useState(false);
   const [like, setLike] = React.useState(false);
+  const [blogtitle, setBlogtitle] = React.useState('');
+  const [blogcontent, setBlogcontent] = React.useState('');
 
   useEffect(() => {
       axios.get('http://localhost:3000/api/blog').then(res => {
@@ -26,7 +28,7 @@ const App = () => {
 
   for (var i = 0; i < blogList.length; i++) {
     names.push(blogList[i].title);
-    author.push(blogList[i].creatorID);
+    author.push(blogList[i].creatorId);
     description.push(blogList[i].content);
     heart.push(blogList[i].numberOfLikes);
     id.push(blogList[i]._id);
@@ -43,12 +45,13 @@ const App = () => {
     };
   });
 
-  const addlike = async (e) => {
-    const url="http://localhost:3000/api/blog/like"
-    if(like===false){
+  async function addlike (blog_id){
+    const url='http://localhost:3000/api/blog/like';
     try{
-      const res = await axios.post(url, { id });
-      if (res.data.isCreated ) {
+      console.log(blog_id);
+      const res = await axios.post(url, { blog_id, });
+      console.log(res.data);
+      if (res.data.isLiked ) {
         console.success('Success！');
       } else{
         Message.error('Failed！');
@@ -57,10 +60,11 @@ const App = () => {
     catch (e) {
       Message.error('Server is down！');
       console.error(e);
-    }}
-    else{
-      Message.error('You already liked it！');
     }
+  }
+
+  async function showdetail (detail){
+    console.log(detail);
   }
 
   return (
@@ -81,11 +85,10 @@ const App = () => {
           actionLayout='vertical'
           actions={[
             <span key={1}>
-              <IconHeart onClick={()=>{addlike(); setLike(true);}}/>
+              <IconHeart onClick={()=>{addlike(item.id); }}/>
               {item.heart}
             </span>,
           ]}
-          
         >
           <List.Item.Meta
             avatar={
@@ -94,19 +97,22 @@ const App = () => {
             title={item.title}
             description={item.description}
             onClick={() => {
+              setBlogtitle(item.title);
+              setBlogcontent(item.description);
               setVisible2(true);
             }}
           />
           <Modal
-        title={item.title}
-        visible={visible2}
-        footer={null}
-        onCancel={() => {
-          setVisible2(false);
-        }}
-      >
-        <p>{item.description}</p>
-      </Modal>
+          title={blogtitle}
+          visible={visible2}
+          footer={null}
+          onCancel={() => {
+            showdetail(item);
+            setVisible2(false);
+          }}
+        >
+          <p>{blogcontent}</p>
+        </Modal>
         </List.Item>
       )}
     />

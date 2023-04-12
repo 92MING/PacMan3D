@@ -10,10 +10,13 @@ const App = () => {
   const { user } = useContext(AuthContext);
   const [visible2, setVisible2] = React.useState(false);
   const[blogList, setBlogList] = useState([]);
+  const [blogtitle, setBlogtitle] = React.useState('');
+  const [blogcontent, setBlogcontent] = React.useState('');
+
   useEffect(() => {
       axios.get('http://localhost:3000/api/blog/get',{user})
       .then(res=>{
-      setBlogList(res.data);
+      setBlogList(res);
     })},[user])
 
     const names = [];
@@ -67,7 +70,7 @@ const App = () => {
                 const url="http://localhost:3000/api/blog"
                 try{
                   const res = await axios.post(url+id, { id });
-                  if (res.data.isCreated ) {
+                  if (res.data.isAdded ) {
                     console.success('Success！');
                   } else{
                     Message.error('Failed！');
@@ -89,18 +92,20 @@ const App = () => {
             title={item.title}
             description={item.description}
             onClick={() => {
+              setBlogtitle(item.title);
+              setBlogcontent(item.description);
               setVisible2(true);
             }}
           />
           <Modal
-        title={item.title}
+        title={blogtitle}
         visible={visible2}
         footer={null}
         onCancel={() => {
           setVisible2(false);
         }}
       >
-        <p>{item.description}</p>
+        <p>{blogcontent}</p>
       </Modal>
         </List.Item>
       )}

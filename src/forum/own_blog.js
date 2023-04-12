@@ -4,11 +4,9 @@ import enUS from '@arco-design/web-react/es/locale/en-US';
 import {IconUpload} from '@arco-design/web-react/icon'
 import { AuthContext } from "../component/AuthContext";
 import axios from 'axios';
-import { useNavigate } from "react-router-dom";
 
 
 import {
-  Result,
   Form,
   Input,
   Button,
@@ -50,13 +48,6 @@ function App() {
   const onValuesChange = (changeValue, values) => {
     console.log('onValuesChange: ', changeValue, values);
   };
-
-
-  const navigate = useNavigate();
-
-  const handleBackClick = () => {
-    navigate(0);
-  }
 
   return (
     <div style={{ maxWidth: 650 }}>
@@ -126,21 +117,8 @@ function App() {
               const url="http://localhost:3000/api/blog/add"
               try{
                 const res = await axios.post(url, { blog_title, blog_content, user });
-                if (res.data.isCreated ) {
-                  <div>
-                  <Result
-                    status='success'
-                    title='Successfully Submitted！'
-                    extra={[
-                      <Button key='again' type='secondary' style={{ margin: '0 16px' }}>
-                        Again
-                      </Button>,
-                      <Button key='back' type='primary' onClick={handleBackClick}>
-                        Back
-                      </Button>,
-                    ]}
-                  ></Result>
-                  </div>
+                if (res.data.isAdded ) {
+                  Message.success('Success！');
                 } else{
                   Message.error('Failed！');
                 }
