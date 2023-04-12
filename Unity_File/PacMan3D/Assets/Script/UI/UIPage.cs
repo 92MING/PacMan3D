@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public abstract class UIPage : MonoBehaviour
 {
-    public UIManager.SwitchMode switchMode = UIManager.SwitchMode.NULL;
+    [HideInInspector] public UIManager.SwitchMode switchMode = UIManager.SwitchMode.NULL; //目前页面的切换模式。切换完毕后变回NULL
 
     public UnityEvent OnEnter = new UnityEvent();
     public UnityEvent OnExit = new UnityEvent();
