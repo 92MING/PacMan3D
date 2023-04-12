@@ -31,17 +31,18 @@
 .arco-list-item-meta{
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .arco-list-item-meta-avatar {
   font-weight: bold;
   padding-right: 10px;
-  width: 100%;
+  width: 60%;
 }
 
 .arco-list-item-meta-description {
   color: var(--color-text-2);
-  padding-left: 10px;
+  padding-left: 100px;
   text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -58,4 +59,16 @@
 .arco-list-item-meta-title {
   display: flex;
   justify-content: flex-end;
+}
+
+.modal {
+  height: 60%;
+}
+
+.test{
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  overflow-y: auto;
+  word-wrap: break-word;
+  word-break: break-all;
 }

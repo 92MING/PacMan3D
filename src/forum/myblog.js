@@ -98,6 +98,7 @@ const App = () => {
             }}
           />
           <Modal
+        className='modal'
         title={blogtitle}
         visible={visible2}
         footer={null}
@@ -105,7 +106,7 @@ const App = () => {
           setVisible2(false);
         }}
       >
-        <p>{blogcontent}</p>
+        <div className='test'>{blogcontent}</div>
       </Modal>
         </List.Item>
       )}
