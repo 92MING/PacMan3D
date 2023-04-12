@@ -112,8 +112,8 @@ public abstract class Character<NormalAtkCls, SkillCls, ChildCls> : CharacterBas
     void Awake()
     {
         base.Awake();
-        _normalAtkSkill = Activator.CreateInstance(typeof(NormalAtkCls), this) as NormalAtkCls;
-        _specialSkill = Activator.CreateInstance(typeof(SkillCls), this) as SkillCls;
+        _normalAtkSkill = Activator.CreateInstance(typeof(NormalAtkCls), new object[] { this }) as NormalAtkCls;
+        _specialSkill = Activator.CreateInstance(typeof(SkillCls), new object[] { this }) as SkillCls;
     }
 
     void FixedUpdate()

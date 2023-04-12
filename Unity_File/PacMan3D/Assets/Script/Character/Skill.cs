@@ -10,6 +10,7 @@ public enum SkillReleaseType
 
 public abstract class SkillBase
 {
+    public SkillBase() { }
     public SkillBase(CharacterBase character)
     {
         thisChar = character;
@@ -25,6 +26,7 @@ public abstract class SkillBase
 public abstract class Skill<ChildSkill> : SkillBase
     where ChildSkill : Skill<ChildSkill>
 {
+    public Skill() { }
     public Skill(CharacterBase character) : base(character) { }
 
     public string nameKey => typeof(ChildSkill).Name; //skill name key. use this to get translated name
@@ -37,6 +39,7 @@ public abstract class Skill<ChildSkill> : SkillBase
 public abstract class ImmediateSkill<ChildSkill>: Skill<ChildSkill>
     where ChildSkill: ImmediateSkill<ChildSkill>
 {
+    public ImmediateSkill() { }
     public ImmediateSkill(CharacterBase character) : base(character) { }
     public override SkillReleaseType releaseType => SkillReleaseType.Immediate;
 }
@@ -45,6 +48,7 @@ public abstract class ImmediateSkill<ChildSkill>: Skill<ChildSkill>
 public abstract class PressAndClickSkill<ChildSkill> : Skill<ChildSkill>
     where ChildSkill: PressAndClickSkill<ChildSkill>
 {
+    public PressAndClickSkill() { }
     public PressAndClickSkill(CharacterBase character) : base(character) { }
     public override SkillReleaseType releaseType => SkillReleaseType.PressAndClick;
     protected bool _prepared = false;
@@ -70,6 +74,7 @@ public abstract class PressAndClickSkill<ChildSkill> : Skill<ChildSkill>
 public abstract class NormalAttackSkill<ChildSkill> : ImmediateSkill<ChildSkill>
     where ChildSkill: NormalAttackSkill<ChildSkill>
 {
+    public NormalAttackSkill() { }
     public NormalAttackSkill(CharacterBase character) : base(character) { }
     public override int energyConsume => 0; //普通攻击不消耗能量
     public abstract float timeInterval { get; } // 释放时间间隔

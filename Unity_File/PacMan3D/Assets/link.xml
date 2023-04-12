@@ -1,0 +1,5 @@
+<linker>
+	<assembly fullname="PacManAssembly">
+		<type fullname="SlimeNormalAttack" preserve="all"/>
+	</assembly>
+</linker>

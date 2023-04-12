@@ -1,47 +1,55 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
+/// <summary>
+/// 地图物件的类型
+/// </summary>
 [System.Serializable]
-public enum MapComponentType
+public enum MapObjectType
 {
-    NULL, EMPTY, OBJECT, MONSTER, PLAYER
+    NULL, // 空，不可行走
+    EMPTY, //地板，可行走，且会生成coin
+    STATIC, //静物，e.g 墙壁
+    MONSTER, //怪物重生点
+    PLAYER //玩家重生点，只能有一个
 }
 
+/// <summary>
+/// 地图物件在地图上的初始方向
+/// </summary>
 [System.Serializable]
-public enum MapComponentDirection
+public enum MapObjectDirection
 {
     UP, DOWN, LEFT, RIGHT
 }
 
 [System.Serializable]
-public class MapComponent 
+public class MapComponent
 {
-    public MapComponentType type;
+    public MapObjectType type;
     public string objName = null; // specific object name, eg "Wall", "Monster1"
-    public MapComponentDirection direction;
+    public MapObjectDirection direction;
 
     public Vector2 getRealDirection()
     {
         return GetDirectionFromEnumDirection(direction);
     }
-    public static Vector2 GetDirectionFromEnumDirection(MapComponentDirection direction)
+    public static Vector2 GetDirectionFromEnumDirection(MapObjectDirection direction)
     {
         switch (direction)
         {
-            case MapComponentDirection.UP:
+            case MapObjectDirection.UP:
                 return Vector2Int.up;
-            case MapComponentDirection.DOWN:
+            case MapObjectDirection.DOWN:
                 return Vector2Int.down;
-            case MapComponentDirection.LEFT:
+            case MapObjectDirection.LEFT:
                 return Vector2Int.left;
-            case MapComponentDirection.RIGHT:
+            case MapObjectDirection.RIGHT:
                 return Vector2Int.right;
         }
         return Vector2Int.up; //default
     }
-
     public static Vector3 GetMapCellPositionByMapPos(Vector2Int mapPos, Vector2 mapSize)
     {
         var pos = new Vector3(mapPos.x - mapSize.x / 2.0f, mapPos.y - mapSize.y / 2.0f, 0);
@@ -81,6 +89,9 @@ public class GameMap
     }
 }
 
+/// <summary>
+/// For changing map cell to json
+/// </summary>
 [System.Serializable]
 public class MapCellJson
 {
@@ -89,6 +100,9 @@ public class MapCellJson
     public int direction;
 }
 
+/// <summary>
+/// For changing map to json
+/// </summary>
 [System.Serializable]
 public class MapJson
 {

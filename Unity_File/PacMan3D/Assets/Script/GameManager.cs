@@ -40,7 +40,7 @@ public class GameManager: Manager<GameManager>
     {
         if (IsPlaying)
         {
-            Debug.LogWarning("Game is already playing");
+            Debug.LogWarning("Game is already playing, can't play again");
             return;
         }
         // TODO
@@ -50,10 +50,20 @@ public class GameManager: Manager<GameManager>
     {
         if (!IsPlaying)
         {
-            Debug.LogWarning("Game is not playing");
+            Debug.LogWarning("Game is not playing, can't pause");
             return;
         }
         // TODO
+    }
+
+    public static void TryCharacter(GameObject charObj)
+    {
+        if (IsPlaying)
+        {
+            Debug.LogWarning("Game is already playing, can't do this");
+            return;
+        }
+        MapManager.LoadMapToGame(MapManager.testMap);
     }
 
     public static void EnterMapEditMode(GameMap map)

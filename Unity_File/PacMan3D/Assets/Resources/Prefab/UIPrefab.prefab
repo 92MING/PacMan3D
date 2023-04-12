@@ -3183,6 +3183,7 @@ MonoBehaviour:
   nameText: {fileID: 676088190249683583}
   prevCharacterButton: {fileID: 625141093584054787}
   nextCharacterButton: {fileID: 8024542381780932085}
+  tryButton: {fileID: 2505748002014788178}
 --- !u!114 &6711286454910045251
 MonoBehaviour:
   m_ObjectHideFlags: 0

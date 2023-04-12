@@ -8,12 +8,14 @@ using UnityEngine;
 /// </summary>
 public class MapManager : Manager<MapManager>
 {
-    public static Dictionary<string, GameMap> AllMaps = new Dictionary<string, GameMap>();
+    public static Dictionary<string, GameMap> AllMaps = new Dictionary<string, GameMap>(); //id, map
+    public static GameMap testMap => AllMaps.TryGetValue("0", out var map)? map: null; // empty map for test
+
     private static GameObject _mapObj;
     public static GameObject mapObj => _mapObj;
     private static GameMap _currentMap = null;
     public static GameMap currentMap => _currentMap;
-    private static MapObjectAbs[,] _mapCells;
+    private static MapObjectBase[,] _mapCells;
     public static float mapScale = 2; //length scale to each cell
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
@@ -30,7 +32,12 @@ public class MapManager : Manager<MapManager>
         }
     }
 
-    public static MapObjectAbs GetMapCellAt(Vector2Int pos)
+    /// <summary>
+    /// get map cell at position(in game scene)
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <returns></returns>
+    public static MapObjectBase GetMapCellAt(Vector2Int pos)
     {
         if (currentMap is null) return null;
         else if (pos.x < 0 || pos.y < 0 || pos.x >= currentMap.mapSize.x || pos.y >= currentMap.mapSize.y) return null;
@@ -57,8 +64,8 @@ public class MapManager : Manager<MapManager>
         int count = 0;
         foreach (var cell in mapJson.mapCells){
             var newCell = new MapComponent();
-            newCell.type = (MapComponentType)cell.type;
-            newCell.direction = (MapComponentDirection)cell.direction;
+            newCell.type = (MapObjectType)cell.type;
+            newCell.direction = (MapObjectDirection)cell.direction;
             newCell.objName = cell.objName;
             newMap.mapCells[count % newMap.mapSize.x, count / newMap.mapSize.x] = newCell;
             count++;
@@ -87,7 +94,7 @@ public class MapManager : Manager<MapManager>
         for (int i = 0; i < mapSize.x * mapSize.y; i++)
         {
             var component = new MapComponent();
-            component.type = MapComponentType.EMPTY;
+            component.type = MapObjectType.EMPTY;
             newMap.mapCells[i % mapSize.x, i / mapSize.x] = component;
         }
         return newMap;
@@ -121,11 +128,11 @@ public class MapManager : Manager<MapManager>
         if (currentMap != null && !replaceCurrent) return;
         DestroyCurrentMap();
         _currentMap = map;
-        _mapCells = new MapObjectAbs[map.mapSize.x, map.mapSize.y];
+        _mapCells = new MapObjectBase[map.mapSize.x, map.mapSize.y];
         int count = 0;
         foreach (var cell in map.mapCells)
         {
-            var newCell = MapObjectAbs.Create(cell.objName, new Vector2Int(count & map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize);
+            var newCell = MapObjectBase.Create(cell.objName, new Vector2Int(count & map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize);
             _mapCells[count & map.mapSize.x, count / map.mapSize.x] = newCell;
             count++;
         }
