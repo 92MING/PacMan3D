@@ -1,56 +1,79 @@
 import '@arco-design/web-react/dist/css/arco.css';
 import './HomePage.css';
-import PopupMenu from './PopupMenu';
-import title_icon from './image/pacman-icon.png';
+import PopupMenu from '../PopUpMenu/PopupMenu';
+import title_icon from '../../image/pacman-icon.png';
 import { Helmet } from 'react-helmet';
-import pacman1 from './image/pacman.png';
-
-
-import React from 'react';
+import pacman1 from '../../image/pacman-icon.png';
+import React ,{useState, useEffect, useContext}from 'react';
+import { useNavigate } from "react-router-dom";
 import { Layout, Menu, Breadcrumb, Button, Message } from '@arco-design/web-react';
-import { IconCaretRight, IconCaretLeft, IconPalette, IconTrophy, IconStorage, IconUserGroup, IconThunderbolt} from '@arco-design/web-react/icon';
-import { Switch } from 'antd';
-
+import { IconCaretRight, IconCaretLeft, IconPalette, IconTrophy, IconStorage, IconUserGroup, IconThunderbolt, IconUser } from '@arco-design/web-react/icon';
+import { AuthContext,useAuth } from '../AuthContext';
+import { toast } from "react-toastify";
+import { FaUserCircle } from "react-icons/fa";
+import {BiLogOut} from "react-icons/bi";
 const MenuItem = Menu.Item;
 const Sider = Layout.Sider;
 const Header = Layout.Header;
 const Footer = Layout.Footer;
 const Content = Layout.Content;
 
-class App extends React.Component {
-  state = {
-    collapsed: false,
-  };
-  constructor(props) {
-    super(props);
-    this.state = {
-    }}
-  handleCollapsed = () => {
-    this.setState({
-      collapsed: !this.state.collapsed,
-    });
+
+export default function HomePage()  {
+  const [collapsed, setCollapsed] = useState(false);
+  const { user } = useContext(AuthContext);
+  const { handleLogout } = useAuth();
+  const navigate = useNavigate();
+
+
+  const handleCollapsed = () => {
+    setCollapsed(!collapsed);
   };
 
-  render() {
-    return (
-      <Layout className='layout-collapse-demo'>
+  const handleLogoutClick = () => {
+    handleLogout();
+    toast.success('Logged out successfully', {
+      position: "top-center",
+      autoClose: 400,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    navigate("/sign-in");
+  };
+
+  return (
+    <Layout className='layout-collapse-demo'>
         <Sider
-          collapsed={this.state.collapsed}
-          onCollapse={this.handleCollapsed}
+          collapsed={collapsed}
+          onCollapse={handleCollapsed}
           collapsible
-          trigger={this.state.collapsed ? <IconCaretRight/> : <IconCaretLeft />}
+          trigger={collapsed ? <IconCaretRight/> : <IconCaretLeft />}
           breakpoint='xl'
           className='menu'
         >
-          <div className='logo'>
-                <img src={pacman1} width = "40px" ></img>
-            </div>
+          <div className='user-info'>
+            <FaUserCircle fontSize={45} color='#cc0000'/>
+            <h5 className = 'user-text' >{user}</h5>
+              {collapsed ?  <button className='logout-btn' onClick= {handleLogoutClick} > 
+                                  <BiLogOut fontSize={20}/>
+                            </button>: 
+               <button className='logout-btn-normal' onClick= {handleLogoutClick} > 
+                  <BiLogOut fontSize={28} style={{ marginRight: '2px' }}/> 
+                  Logout
+               </button>
+               }
+          </div>
           <Menu
             defaultOpenKeys={['1']}
             defaultSelectedKeys={['0_5']}
             style={{ width: '100%'}}
             className='menu'
           >
+         
             <div className='div-design'>
             <MenuItem key='0_1'style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconTrophy />
@@ -113,7 +136,5 @@ class App extends React.Component {
         </Layout>
       </Layout>
     );
-  }
-}
+};
 
-export default App;

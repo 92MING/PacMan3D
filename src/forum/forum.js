@@ -4,10 +4,12 @@ import Blog from './Blog';
 import Upload from './own_blog'
 import MyBlog from './myblog'
 import './forum.css'
+import { AuthContext } from "../component/AuthContext";
+
 const TabPane = Tabs.TabPane;
 const style = {
   textAlign: 'center',
-  marginTop: 20,
+  marginTop: 0,
 };
 
 const App = () => {

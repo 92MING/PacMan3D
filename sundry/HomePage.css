@@ -1,0 +1,66 @@
+
+.display_wrapper{
+    background-color: black;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+
+  }
+.display-box{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: auto;
+    padding-bottom: auto;
+    height: 420px;
+    width: 300px;
+  }
+
+.start-game{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+  .start-game-btn{
+    border-radius: 2.5em;
+    height: 50px;
+    width: 150px;
+  }
+
+  .create-map{
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+    align-content: center;
+  }
+
+  .create-map-btn{
+    height: 50px;
+    width: 150px;
+    border-radius:  2.5em;
+  }
+
+  .map-menu{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+  .map-menu-btn{
+    height: 50px;
+    width: 150px;
+    border-radius: 2.5em;
+  }
+  .quit{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+  .quit-btn{
+    height: 50px;
+    width: 150px;
+    border-radius: 2.5em;
+  }
+
+  
