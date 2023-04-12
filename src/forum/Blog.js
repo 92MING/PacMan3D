@@ -18,12 +18,20 @@ const App = () => {
       })}
     ,[])
 
-  const names = [blogList.title];
-  const author=[blogList.creatorID];
-  const description=[blogList.content];
-  const heart=[blogList.numberOfLikes];
-  const id=[blogList._id]
+  const names = [];
+  const author=[];
+  const description=[];
+  const heart=[];
+  const id=[];
 
+  for (var i = 0; i < blogList.length; i++) {
+    names.push(blogList[i].title);
+    author.push(blogList[i].creatorID);
+    description.push(blogList[i].content);
+    heart.push(blogList[i].numberOfLikes);
+    id.push(blogList[i]._id);
+  }
+  
   const dataSource = new Array(blogList.length).fill(null).map((_, index) => {
     return {
       index: index,
