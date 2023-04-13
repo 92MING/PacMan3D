@@ -31,13 +31,15 @@
 .arco-list-item-meta{
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 }
 
 .arco-list-item-meta-avatar {
   font-weight: bold;
   padding-right: 10px;
   width: 60%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .arco-list-item-meta-description {

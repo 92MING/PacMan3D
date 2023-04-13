@@ -14,9 +14,10 @@ const App = () => {
   const [blogcontent, setBlogcontent] = React.useState('');
 
   useEffect(() => {
-      axios.get('http://localhost:3000/api/blog/get',{user})
-      .then(res=>{
-      setBlogList(res);
+      const url='http://localhost:3000/api/blog';
+      axios.get(url+"/"+user).then(res=>{
+      console.log(res.data);
+      setBlogList(res.data);
     })},[user])
 
     const names = [];
@@ -24,6 +25,7 @@ const App = () => {
     const description=[];
     const heart=[];
     const id=[];
+    const date=[];
   
     for (var i = 0; i < blogList.length; i++) {
       names.push(blogList[i].title);
@@ -31,6 +33,7 @@ const App = () => {
       description.push(blogList[i].content);
       heart.push(blogList[i].numberOfLikes);
       id.push(blogList[i]._id);
+      date.push(blogList[i].createdAt);
     }
 
   const dataSource = new Array(blogList.length).fill(null).map((_, index) => {
@@ -41,8 +44,19 @@ const App = () => {
       description: description[index % description.length],
       heart: heart[index % heart.length],
       id: id[index % id.length],
+      date: date[index % date.length],
     };
   });
+
+  function getDateTime(time) {
+    var date = new Date(time);
+    var month = date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1;
+    var currentDate = date.getDate() < 10 ? "0" + date.getDate() : date.getDate();
+    var hh = date.getHours() < 10 ? "0" + date.getHours() : date.getHours();
+    var mm = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes();
+    var ss = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
+    return date.getFullYear() + "-" + month + "-" + currentDate+" "+hh + ":" + mm+":"+ss;
+}
 
   return (
     <div className='demo'>
@@ -61,17 +75,12 @@ const App = () => {
           style={{ padding: '20px 0', borderBottom: '1px solid var(--color-fill-3)' }}
           actionLayout='vertical'
           actions={[
-            <span key={1}>
-              <IconHeart />
-              {item.heart}
-            </span>,
-            <span key={2}>
-                <IconDelete onClick={async (e) => {
+            <span key={2} onClick={async (e) => {
                 const url="http://localhost:3000/api/blog"
                 try{
-                  const res = await axios.post(url+id, { id });
-                  if (res.data.isAdded ) {
-                    console.success('Success！');
+                  const res = await axios.delete(url+"/"+item.id);
+                  if (res.data.isDeleted ) {
+                    Message.success('Successfully deleted！');
                   } else{
                     Message.error('Failed！');
                   }
@@ -80,14 +89,15 @@ const App = () => {
                   Message.error('Server is down！');
                   console.error(e);
                 }
-              }}/>
+              }}>
+                <IconDelete />
                 Delete
             </span>
           ]}
         >
           <List.Item.Meta
             avatar={
-                item.author
+                getDateTime(item.date)
             }
             title={item.title}
             description={item.description}
