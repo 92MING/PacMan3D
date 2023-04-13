@@ -1,8 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using MongoDB.Driver;
+using MongoDB.Bson;
 
 [System.Serializable]
 public enum MapElement
@@ -29,7 +33,13 @@ public class MapEditPage : UIPage
     [SerializeField] private GameObject mapBoxGameobjectPrefab;
 
     [Header("Var")]
+    // MongoDB collection name
+    const string collectionName = "maps";
     public MapElement mapElement;
+
+    MongoClient client = new MongoClient(NetworkManager.connectionString);
+    IMongoDatabase database;
+    IMongoCollection<BsonDocument> collection;
 
     private void Awake()
     {
@@ -68,11 +78,65 @@ public class MapEditPage : UIPage
     {
         //TODO: Unlock this when UploadFile done
         //StartCoroutine(UploadFile());
+
+        GameMap gameMap = new GameMap();
+        //TODO
+        gameMap.id = "0"; 
+        gameMap.createrID = null;
+        gameMap.name = "no Name";
+        gameMap.mapSize = new Vector2Int(20, 20);
+
+        int count = 0;
+        foreach(Transform child in mapPreviewTransform)
+        {
+            MapBox mapBox = child.GetComponent<MapBox>();
+            MapElement mapElement = mapBox.mapElement;
+
+            MapComponent mapCellJson = new MapComponent();
+            mapCellJson.type = (MapObjectType) 2;
+            mapCellJson.objName = "MetalWall1";
+            mapCellJson.direction = 0;
+            mapCellJson.pos = Vector2Int.zero;
+
+            if (mapElement == MapElement.Wall1)
+            {
+                mapCellJson.type = (MapObjectType) 2;
+                mapCellJson.objName = "MetalWall1";
+            }
+            if (mapElement == MapElement.Wall2)
+            {
+                mapCellJson.type = (MapObjectType) 2;
+                mapCellJson.objName = "MetalWall2";
+            }
+            if (mapElement == MapElement.Player)
+            {
+                mapCellJson.type = (MapObjectType)4;
+                mapCellJson.objName = "smile"; //TODO
+            }
+            if (mapElement == MapElement.Monster)
+            {
+                mapCellJson.type = (MapObjectType) 3;
+                mapCellJson.objName = "monster";//TODO
+            }
+            else
+            {
+                mapCellJson.type = (MapObjectType) 1;
+                mapCellJson.objName = "floor";//TODO
+            }
+
+            gameMap.mapCells[count / 20, count % 20] = mapCellJson; //TODO: some error here [Null reference]
+
+            count++;
+        }
+
+        string jsonStr = gameMap.serialize().jsonStr();
+
+        NetworkManager.UploadDataToDB(collectionName, jsonStr);
     }
 
     private void LoadButtonFunction()
     {
-        
+        NetworkManager.DownloadDataToDB(collectionName);
     }
 
     //Other Functions

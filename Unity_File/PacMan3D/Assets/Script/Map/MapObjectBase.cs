@@ -9,13 +9,13 @@ using UnityEngine;
 /// </summary>
 public abstract class MapObjectBase : MonoBehaviour
 {
-    protected static Dictionary<string, Type> MapObjClasses = new Dictionary<string, Type>(); //所有地图物件类
+    public static Dictionary<string, Type> MapObjClasses = new Dictionary<string, Type>(); //所有地图物件类
     public abstract MapObjectType type { get; }
     public Vector2Int originPos;
     public MapObjectDirection originDirection;
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    private static void GetAllMapObjectClass()
+    public static void GetAllMapObjectClass()
     {
         foreach (var clsType in Assembly.GetExecutingAssembly().GetTypes())
         {

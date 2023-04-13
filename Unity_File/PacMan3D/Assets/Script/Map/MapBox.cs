@@ -20,6 +20,9 @@ public class MapBox : MonoBehaviour
             mapElement = GameObject.Find("mapEditPage").GetComponent<MapEditPage>().mapElement;
             transform.GetComponent<Image>().sprite = MapEleemntSprite();
         });
+
+        //mapElement = MapElement.Floor;
+        //transform.GetComponent<Image>().sprite = MapEleemntSprite();
     }
 
     private Sprite MapEleemntSprite()
