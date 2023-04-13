@@ -16,6 +16,9 @@ public class SystemManager : Manager<SystemManager>
     private static Dictionary<string, string[]> LanguageDictionary = new Dictionary<string, string[]>(); //key, list of translated words
     public static Language _currentLanguage;
     public static Language currnetLanguage => _currentLanguage;
+    public static readonly float defaultMouseSensitivety = 4.0f;
+    private static float _mouseSensitivety = defaultMouseSensitivety;
+    public static float mouseSensitivety => _mouseSensitivety;
 
     public static bool TryGetTranslation(string key, out string translateWord, Language? lang = null)
     {

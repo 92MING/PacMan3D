@@ -11,12 +11,16 @@ public class MapManager : Manager<MapManager>
     public static Dictionary<string, GameMap> AllMaps = new Dictionary<string, GameMap>(); //id, map
     public static GameMap testMap => AllMaps.TryGetValue("0", out var map)? map: null; // empty map for test
 
-    private static GameObject _mapObj;
+    public static readonly float mapScale = 1.0f; //length scale to each cell
+
+    private static GameObject _mapObj; //在游戏场景里面的"Map.负责装载所有地图Cell物体
     public static GameObject mapObj => _mapObj;
-    private static GameMap _currentMap = null;
+
+    private static GameMap _currentMap = null; //当前地图
     public static GameMap currentMap => _currentMap;
-    private static MapObjectBase[,] _mapCells;
-    public static float mapScale = 2; //length scale to each cell
+    private static MapObjectBase[,] _mapCells; //目前地图的所有Cell
+    public static MapObjectBase currentPlayerRebornCell => GetMapCellAt(currentMap.playerRebornPos);
+    public static GameObject currentPlayerRebornCellObj => GetMapCellObjAt(currentMap.playerRebornPos);
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void LoadAllLocalMaps()
@@ -40,8 +44,13 @@ public class MapManager : Manager<MapManager>
     public static MapObjectBase GetMapCellAt(Vector2Int pos)
     {
         if (currentMap is null) return null;
-        else if (pos.x < 0 || pos.y < 0 || pos.x >= currentMap.mapSize.x || pos.y >= currentMap.mapSize.y) return null;
+        else if (pos.x < 0 || pos.y < 0 || pos.x >= currentMap.mapSize.x || pos.y >= currentMap.mapSize.y) return null; // out of map
         return _mapCells[pos.x, pos.y];
+    }
+    public static GameObject GetMapCellObjAt(Vector2Int pos)
+    {
+        var cell = GetMapCellAt(pos);
+        return (cell is null) ? null : cell.gameObject;
     }
 
     /// <summary>
@@ -67,6 +76,7 @@ public class MapManager : Manager<MapManager>
             newCell.type = (MapObjectType)cell.type;
             newCell.direction = (MapObjectDirection)cell.direction;
             newCell.objName = cell.objName;
+            newCell.pos = new Vector2Int(count % newMap.mapSize.x, count / newMap.mapSize.x);
             newMap.mapCells[count % newMap.mapSize.x, count / newMap.mapSize.x] = newCell;
             count++;
         }
@@ -132,8 +142,8 @@ public class MapManager : Manager<MapManager>
         int count = 0;
         foreach (var cell in map.mapCells)
         {
-            var newCell = MapObjectBase.Create(cell.objName, new Vector2Int(count & map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize);
-            _mapCells[count & map.mapSize.x, count / map.mapSize.x] = newCell;
+            var newCell = MapObjectBase.Create(cell.objName, new Vector2Int(count % map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize);
+            _mapCells[count % map.mapSize.x, count / map.mapSize.x] = newCell;
             count++;
         }
     }

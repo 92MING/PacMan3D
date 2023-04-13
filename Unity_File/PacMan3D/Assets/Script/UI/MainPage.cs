@@ -23,7 +23,7 @@ public class MainPage : UIPage
         AI_Player_Game_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.PLAYER_AI_PAGE); });
         Player_Player_Game_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.PLAYER_PLAYER_PAGE); });
         Character_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.CHARACTER_PAGE); });
-        Map_Edit_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.SETTING_PAGE); });
+        Map_Edit_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.MAP_EDIT_PAGE); });
         Setting_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.SETTING_PAGE); });
         Honor_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.HONOR_PAGE); });
         About_Button.onClick.AddListener(() => { UIManager.switchToPage(UIManager.UIPages.ABOUT_PAGE); });

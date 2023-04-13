@@ -1,1 +1,1133 @@
-{"id": "0", "creatorID": null, "name": "Test Map", "mapSize": "10x10", "mapCells": [{"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 1, "objName": null, "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}, {"type": 2, "objName": "Wall", "direction": 0}]}
+{
+    "id": "0",
+    "creatorID": null,
+    "name": "Test Map",
+    "mapSize": "15x15",
+    "mapCells": [
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 4,
+            "objName": "MetalFloor",
+            "direction": 3
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall2",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall2",
+            "direction": 0
+        },
+        {
+            "type": 0,
+            "objName": null,
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall2",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall2",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 1,
+            "objName": "MetalFloor",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        },
+        {
+            "type": 2,
+            "objName": "MetalWall1",
+            "direction": 0
+        }
+    ]
+}

@@ -34,7 +34,7 @@ public class CharacterPage : UIPage
         UIManager.characterPage = this;
         prevCharacterButton.onClick.AddListener(switchNextCharacter);
         nextCharacterButton.onClick.AddListener(switchPrevCharacter);
-        tryButton.onClick.AddListener(() => { tryCharacter(showingChar); });
+        tryButton.onClick.AddListener(tryCharacter);
     }
     private void Start()
     {
@@ -46,10 +46,11 @@ public class CharacterPage : UIPage
             }
             _showingCharObj.transform.position = CharacterRightPos;
             var characterComponent = _showingCharObj.GetComponent<CharacterBase>();
+            characterComponent.exitGameMode();
             hpText.text = characterComponent.maxHP.ToString();
-            atkText.text = characterComponent.maxAttack.ToString();
-            defText.text = characterComponent.maxDefence.ToString();
-            spdText.text = characterComponent.maxSpeed.ToString();
+            atkText.text = characterComponent.atk.ToString();
+            defText.text = characterComponent.def.ToString();
+            spdText.text = characterComponent.spd.ToString();
             nameText.text = firstCharacterType.Name;
         });
         OnSwitching.AddListener((progress) =>
@@ -82,8 +83,10 @@ public class CharacterPage : UIPage
         _showingCharObj = Instantiate(ResourcesManager.GetPrefab(CharacterBase.AllCharacterType.ElementAt(currentIndex - 1).Name));
         _showingCharObj.transform.position = CharacterMiddlePos;
     }
-    public void tryCharacter(CharacterBase character)
+    
+    public void tryCharacter()
     {
-        if (character is null) return;
+        if (showingChar is null) return;
+        GameManager.TryCharacter(showingCharObj);
     }
 }

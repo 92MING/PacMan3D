@@ -23,19 +23,9 @@ public enum MapObjectDirection
 {
     UP, DOWN, LEFT, RIGHT
 }
-
-[System.Serializable]
-public class MapComponent
+public static class MapObjectDirectionExtension
 {
-    public MapObjectType type;
-    public string objName = null; // specific object name, eg "Wall", "Monster1"
-    public MapObjectDirection direction;
-
-    public Vector2 getRealDirection()
-    {
-        return GetDirectionFromEnumDirection(direction);
-    }
-    public static Vector2 GetDirectionFromEnumDirection(MapObjectDirection direction)
+    public static Vector2 GetReal2Ddirection(this MapObjectDirection direction)
     {
         switch (direction)
         {
@@ -50,9 +40,24 @@ public class MapComponent
         }
         return Vector2Int.up; //default
     }
+    public static Vector3 GetReal3Ddirection(this MapObjectDirection direction)
+    {
+        var dir2D = direction.GetReal2Ddirection();
+        return new Vector3(dir2D.x, 0, dir2D.y);
+    }
+}
+
+[System.Serializable]
+public class MapComponent
+{
+    public MapObjectType type;
+    public string objName = null; // specific object name, eg "Wall", "Monster1"
+    public MapObjectDirection direction;
+    public Vector2Int pos;
+
     public static Vector3 GetMapCellPositionByMapPos(Vector2Int mapPos, Vector2 mapSize)
     {
-        var pos = new Vector3(mapPos.x - mapSize.x / 2.0f, mapPos.y - mapSize.y / 2.0f, 0);
+        var pos = new Vector3(mapPos.x - mapSize.x / 2.0f, 0, mapPos.y - mapSize.y / 2.0f);
         pos *= MapManager.mapScale;
         return pos;
     }
@@ -66,7 +71,31 @@ public class GameMap
     public string name;
     
     public Vector2Int mapSize;
+    public int mapCellCount => mapSize.x * mapSize.y;
     public MapComponent[,] mapCells; //x,y
+    
+    private Vector2Int? _playerRebornPos = null; //玩家重生点是唯一的
+    public Vector2Int playerRebornPos
+    {
+        get
+        {
+            if (_playerRebornPos is null)
+            {
+                int count = 0;
+                foreach (var component in mapCells)
+                {
+                    if (component.type == MapObjectType.PLAYER)
+                    {
+                        _playerRebornPos = new Vector2Int(count % mapSize.x, count / mapSize.x) ;
+                        break;
+                    }
+                    count++;
+                }
+                if (count == mapCellCount) _playerRebornPos = Vector2Int.zero;
+            }
+            return (Vector2Int)_playerRebornPos;
+        }
+    }
 
     public MapJson serialize()
     {

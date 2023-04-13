@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class NetworkManager : Manager<NetworkManager>
 {
-
-    private const string SERVERIP = "";
+    public readonly string SERVERIP = "";
 
     public static void SaveMapToServer(MapJson mapJson)
     {

@@ -22,14 +22,14 @@ public class UIManager : Manager<UIManager>
         HONOR_PAGE,
         ABOUT_PAGE,
     }
-
-    private GameObject _UIPrefab;
-    private Canvas _canvas;
-    private CanvasGroup _canvasGroup;
-    private Stack<UIPages> _pageRecord = new Stack<UIPages>();
+    
+    private static GameObject _UIObject; //主要UI game object
+    private static Canvas _canvas; //主要UI的canvas
+    private static CanvasGroup _canvasGroup;
+    private static Stack<UIPages> _pageRecord = new Stack<UIPages>();
         
-    public static UIPages currentPage => instance._pageRecord.Peek();
-    public static UIPages secondCurrentPage => instance._pageRecord.Count > 1 ? instance._pageRecord.ToArray()[1] : UIPages.MAIN_PAGE;
+    public static UIPages currentPage => _pageRecord.Peek();
+    public static UIPages secondCurrentPage =>_pageRecord.Count > 1 ? _pageRecord.ToArray()[1] : UIPages.MAIN_PAGE;
     public static MainPage mainPage;
     public static Player_AI_Page playerAIPage;
     public static Player_Player_Page playerPlayerPage;
@@ -40,19 +40,27 @@ public class UIManager : Manager<UIManager>
     public static AboutPage aboutPage;
     public static Button returnButton;
 
+    //for game mode
+    private static GameObject inGameUIObj;
+    private static InGameUI inGameUI;
+    private static bool _inGameMode = false;
+
     void Awake()
     {
         base.Awake();
-        _UIPrefab = ResourcesManager.GetPrefab("UIPrefab");
-        var obj = Instantiate(_UIPrefab);
-        obj.name = "UI";
-        _canvas = obj.GetComponent<Canvas>();
-        _canvasGroup = obj.GetComponent<CanvasGroup>();
-        returnButton = obj.transform.Find("return").GetComponent<Button>();
-        foreach (Transform child in obj.transform)
+        _UIObject = Instantiate(ResourcesManager.GetPrefab("UIPrefab"));
+        _UIObject.name = "UI";
+        _canvas = _UIObject.GetComponent<Canvas>();
+        _canvasGroup = _UIObject.GetComponent<CanvasGroup>();
+        returnButton = _UIObject.transform.Find("return").GetComponent<Button>();
+        foreach (Transform child in _UIObject.transform)
         {
             child.gameObject.SetActive(true);
         }
+
+        inGameUIObj = Instantiate(ResourcesManager.GetPrefab("InGameUI"));
+        inGameUIObj.name = "InGameUI";
+        inGameUI = inGameUIObj.GetComponent<InGameUI>();
     }
     void Start()
     {
@@ -151,24 +159,39 @@ public class UIManager : Manager<UIManager>
     public static void switchToPage(UIPages targetPage)
     {
         if (currentPage == targetPage) return;
-        if (instance._pageRecord.Count > 0)
+        if (_pageRecord.Count > 0)
         {
             var _curPage = _getPageInsByEnum(currentPage);
             _switchPage(_curPage, SwitchMode.EXIT);
         }
         var pageIns = _getPageInsByEnum(targetPage);
-        instance._pageRecord.Push(targetPage);
+        _pageRecord.Push(targetPage);
         _switchPage(pageIns, SwitchMode.ENTER);
     }
     public static void backToPrevPage()
     {
-        if (instance._pageRecord.Count <=1) return;
+        if (_pageRecord.Count <=1) return;
         var _curPage = _getPageInsByEnum(currentPage);
         _switchPage(_curPage, SwitchMode.RETURN_EXIT);
         
-        instance._pageRecord.Pop();
+        _pageRecord.Pop();
         
         var _prevPage = _getPageInsByEnum(currentPage);
         _switchPage(_prevPage, SwitchMode.RETURN);
+    }
+
+    public static void enterGameMode()
+    {
+        if (_inGameMode) return;
+        _UIObject.SetActive(false);
+        inGameUI.gameObject.SetActive(true);
+        _inGameMode = true;
+    }
+    public static void exitGameMode()
+    {
+        if (!_inGameMode) return;
+        _UIObject.SetActive(true);
+        inGameUI.gameObject.SetActive(false);
+        _inGameMode = false;
     }
 }
