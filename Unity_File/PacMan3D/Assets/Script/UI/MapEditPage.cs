@@ -85,6 +85,7 @@ public class MapEditPage : UIPage
         gameMap.createrID = null;
         gameMap.name = "no Name";
         gameMap.mapSize = new Vector2Int(20, 20);
+        gameMap.mapCells = new MapComponent [20,20];
 
         int count = 0;
         foreach(Transform child in mapPreviewTransform)
