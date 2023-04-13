@@ -5,9 +5,15 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
+<<<<<<< HEAD
   <React.StrictMode>
     <App />
   </React.StrictMode>,
+=======
+  //<React.StrictMode>
+    <App />
+  //</React.StrictMode>,
+>>>>>>> master
 )
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
