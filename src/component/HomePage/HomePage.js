@@ -82,7 +82,7 @@ export default function HomePage()  {
               </Button>
             </MenuItem>
             </div>
-            <div className='div-design'>
+            {/* <div className='div-design'>
             <MenuItem key='0_2'style={{backgroundColor:"rgb(238, 219, 98)"}}>
               <IconPalette />
               <Button type='text' className='t-btn' shape='round' href='/home-page/create-map'>
@@ -97,7 +97,7 @@ export default function HomePage()  {
               Map Menu
               </Button>
             </MenuItem>
-            </div>
+            </div> */}
            
            <div  className='div-design'>
             <MenuItem key='0_4' style={{backgroundColor:"rgb(238, 219, 98)"}}> 
@@ -108,12 +108,12 @@ export default function HomePage()  {
             </MenuItem>
             </div>
             
-            <div className='div-design'>
+            {/* <div className='div-design'>
             <MenuItem key='0_5' style={{backgroundColor:"rgb(238,219,98)"}}>
               <IconThunderbolt/>
               <PopupMenu/>
             </MenuItem>
-            </div>
+            </div> */}
           </Menu>
         </Sider>
         <Layout>

@@ -83,22 +83,8 @@ export default function OnlineForum() {
               </Button>
             </MenuItem>
             </div>
-            <div className='div-design'>
-            <MenuItem key='0_2'style={{backgroundColor:"rgb(238, 219, 98)"}}>
-              <IconPalette />
-              <Button type='text' className='t-btn' shape='round' href='/home-page/create-map'>
-                    Create Map
-              </Button>
-            </MenuItem>
-            </div>
-            <div className='div-design'>
-            <MenuItem key='0_3' style={{backgroundColor:"rgb(238, 219, 98)"}}>
-              <IconStorage />
-              <Button type='text' className='t-btn' shape='round' href='/home-page/map-menu'>
-                Map Menu
-              </Button>
-            </MenuItem>
-            </div>
+            
+            
            
             <div className='div-design'>
             <MenuItem key='0_4' style={{backgroundColor:"rgb(238, 219, 98)"}}> 
@@ -109,12 +95,7 @@ export default function OnlineForum() {
             </MenuItem>
             </div>
             
-            <div className='div-design'>
-            <MenuItem key='0_5' style={{backgroundColor:"rgb(238,219,98)"}}>
-              <IconThunderbolt/>
-              <PopupMenu/>
-            </MenuItem>
-            </div>
+            
           </Menu>
         </Sider>
         <Layout>

@@ -2,11 +2,7 @@
     width: 183px;
     height: 119px;
     border-radius: 2px;
-<<<<<<< HEAD
-    overflow: hidden;
-=======
     text-overflow: ellipsis;
->>>>>>> master
   }
   
   .list-demo-action-layout .image-area img {
@@ -24,9 +20,5 @@
       background-color: var(--color-bg-2);
       border-radius: 2px 2px 0 0;
   }
-<<<<<<< HEAD
-  
-=======
 
->>>>>>> master
   
