@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
 [System.Serializable]
 public enum MapElement
 {
-    Floor, Wall, Player, Monster
+    Floor, Wall1, Wall2, Player, Monster
 }
 
 public class MapEditPage : UIPage
@@ -18,7 +19,8 @@ public class MapEditPage : UIPage
 
     [Header("Map Element")]
     [SerializeField] private Button floorButton;
-    [SerializeField] private Button wallButton;
+    [SerializeField] private Button wall1Button;
+    [SerializeField] private Button wall2Button;
     [SerializeField] private Button playerButton;
     [SerializeField] private Button monsterButton;
     [SerializeField] private Transform selectArrowTransform;
@@ -37,10 +39,9 @@ public class MapEditPage : UIPage
         saveButton.onClick.AddListener(() => SaveButtonFunction());
         loadButton.onClick.AddListener(() => LoadButtonFunction());
 
-        SetMapElement(floorButton);
-
         floorButton.onClick.AddListener(delegate { mapElement = MapElement.Floor; SetMapElement(floorButton); });
-        wallButton.onClick.AddListener(delegate { mapElement = MapElement.Wall; SetMapElement(wallButton); });
+        wall1Button.onClick.AddListener(delegate { mapElement = MapElement.Wall1; SetMapElement(wall1Button); });
+        wall2Button.onClick.AddListener(delegate { mapElement = MapElement.Wall2; SetMapElement(wall2Button); });
         playerButton.onClick.AddListener(delegate { mapElement = MapElement.Player; SetMapElement(playerButton); });
         monsterButton.onClick.AddListener(delegate { mapElement = MapElement.Monster; SetMapElement(monsterButton); });
 
@@ -65,7 +66,8 @@ public class MapEditPage : UIPage
     //Button Function
     private void SaveButtonFunction()
     {
-
+        //TODO: Unlock this when UploadFile done
+        //StartCoroutine(UploadFile());
     }
 
     private void LoadButtonFunction()
@@ -76,21 +78,31 @@ public class MapEditPage : UIPage
     //Other Functions
     private void SetMapElement(Button button)
     {
-        if (button == floorButton)
+        selectArrowTransform.position = button.transform.position + new Vector3(70f, 0, 0);
+    }
+
+    IEnumerator UploadFile()
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("myField", "myData");
+
+
+
+        //TODO
+        string urlLink = ""; //Fill this link later
+
+        using (UnityWebRequest www = UnityWebRequest.Post(urlLink, form))
         {
-            selectArrowTransform.localPosition = new Vector3(54.8f, 147, 0);
-        }
-        else if (button == wallButton)
-        {
-            selectArrowTransform.localPosition = new Vector3(54.8f, -106.8f + 177, 0);
-        }
-        else if (button == playerButton)
-        {
-            selectArrowTransform.localPosition = new Vector3(54.8f, -183.6f + 177, 0);
-        }
-        else if (button == monsterButton)
-        {
-            selectArrowTransform.localPosition = new Vector3(54.8f, -260.4f + 177, 0);
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log("Form upload complete!");
+            }
         }
     }
 }

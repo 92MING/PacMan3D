@@ -8,7 +8,8 @@ public class MapBox : MonoBehaviour
     public MapElement mapElement;
 
     public Sprite floorSprite;
-    public Sprite wallSprite;
+    public Sprite wall1Sprite;
+    public Sprite wall2Sprite;
     public Sprite playerSprite;
     public Sprite monsterSprite;
 
@@ -23,9 +24,13 @@ public class MapBox : MonoBehaviour
 
     private Sprite MapEleemntSprite()
     {
-        if (mapElement == MapElement.Wall)
+        if (mapElement == MapElement.Wall1)
         {
-            return wallSprite;
+            return wall1Sprite;
+        }
+        if (mapElement == MapElement.Wall2)
+        {
+            return wall2Sprite;
         }
         if (mapElement == MapElement.Player)
         {
