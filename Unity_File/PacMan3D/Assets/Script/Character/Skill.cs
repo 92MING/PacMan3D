@@ -18,9 +18,31 @@ public abstract class SkillBase
     public readonly CharacterBase thisChar;
     public abstract SkillReleaseType releaseType { get; }
     public abstract int energyConsume { get; }
+    public abstract bool prepared { get; } //技能是否已经准备好，只有PressAndClick类技能需要
 
-    //真正的use, 每个技能各自定义
+    //准备使用技能，只有PressAndClick类技能需要
+    public abstract void prepare();
+    //真正的准备技能部分，重写这部分
+    public virtual void _prepare() { }
+    //使用技能, 每个技能各自定义
     public abstract void use();
+    //真正的使用技能部分，重写这部分
+    public virtual void _use() { }
+    //取消使用技能，只有PressAndClick类技能需要
+    public abstract void cancel();
+    //真正的取消技能部分，重写这部分
+    public virtual void _cancel() { }
+
+    //检查与扣减能量
+    protected bool checkEnergyEnough()
+    {
+        if (thisChar is null) return false;
+        return thisChar.energy >= energyConsume;
+    }
+    protected void consumeEnergy()
+    {
+        thisChar.energy -= energyConsume;
+    }
 }
 
 public abstract class Skill<ChildSkill> : SkillBase
@@ -39,9 +61,24 @@ public abstract class Skill<ChildSkill> : SkillBase
 public abstract class ImmediateSkill<ChildSkill>: Skill<ChildSkill>
     where ChildSkill: ImmediateSkill<ChildSkill>
 {
+    public override bool prepared => true; //瞬发型技能无需准备
+
     public ImmediateSkill() { }
     public ImmediateSkill(CharacterBase character) : base(character) { }
     public override SkillReleaseType releaseType => SkillReleaseType.Immediate;
+
+    public override void prepare() { Debug.LogWarning("Immediate skill do not need prepare!"); }
+    public override void _prepare() { Debug.LogWarning("Immediate skill do not need prepare!"); }
+    public override void cancel() { Debug.LogWarning("Immediate skill do not need cancel!"); }
+    public override void _cancel() { Debug.LogWarning("Immediate skill do not need cancel!"); }
+    public override void use()
+    {
+        if (thisChar is null) return;
+        if (!checkEnergyEnough()) return;
+        consumeEnergy();
+        _use(); //其他行为透过重写这个方法实现
+    }
+    
 }
 
 //按Q+點鼠標型的技能
@@ -52,22 +89,33 @@ public abstract class PressAndClickSkill<ChildSkill> : Skill<ChildSkill>
     public PressAndClickSkill(CharacterBase character) : base(character) { }
     public override SkillReleaseType releaseType => SkillReleaseType.PressAndClick;
     protected bool _prepared = false;
-    public bool prepared => _prepared;
+    public override bool prepared => _prepared;
 
     //準備使用技能（按下Q）
-    protected virtual void prepare()
+    public override void prepare()
     {
         if (prepared) return;
+        if (!checkEnergyEnough()) return;
+        
+        consumeEnergy(); //准备时就已经消耗能量
         _prepared = true;
-        //其他行为透过重写这个方法实现
+        _prepare(); //其他行为透过重写这个方法实现
     }
     //取消使用技能
-    protected virtual void cancelPrepare()
+    public override void cancel()
     {
         if (!prepared) return;
         _prepared = false;
-        //其他行为透过重写这个方法实现
+        _cancel(); //其他行为透过重写这个方法实现
     }
+    public override void use()
+    {
+        if (thisChar is null) return;
+        if (!prepared) return;
+        _prepared = false;
+        _use(); //其他行为透过重写这个方法实现
+    }
+    
 }
 
 //普通攻击类。普通攻击必為瞬發
@@ -78,6 +126,15 @@ public abstract class NormalAttackSkill<ChildSkill> : ImmediateSkill<ChildSkill>
     public NormalAttackSkill(CharacterBase character) : base(character) { }
     public override int energyConsume => 0; //普通攻击不消耗能量
     public abstract float timeInterval { get; } // 释放时间间隔
+    protected float _nextUse = 0f;
+
+    public override void use()
+    {
+        if (thisChar is null) return;
+        if (Time.time < _nextUse) return; //普通攻击有间隔
+        _nextUse = Time.time + timeInterval;
+        _use(); //其他行为透过重写这个方法实现
+    }
 }
 
 

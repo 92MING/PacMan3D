@@ -8,7 +8,7 @@ public class SlimeSkill : PressAndClickSkill<SlimeSkill>
     public SlimeSkill(CharacterBase character) : base(character) { }
     public override int energyConsume => 50;
 
-    public override void use()
+    public override void _use()
     {
         //TODO
     }

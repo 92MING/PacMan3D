@@ -53,7 +53,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected HashSet<MapObjectBase> _colliders = new HashSet<MapObjectBase>();
 
-    public virtual float jumpForce => 240.0f; // 跳跃力
+    public virtual float jumpForce => 5.0f; // 跳跃力
     public bool touchingFloor
     {
         get
@@ -123,16 +123,10 @@ public abstract class CharacterBase : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (touchingFloor) rigidBody.AddForce(transform.up * jumpForce);
+            if (touchingFloor) rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
         }
     }
-    protected virtual void attackAndSkillControl()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            switchAnimation(CharacterAnimation.ATTACK);
-        }
-    }
+    protected abstract void attackAndSkillControl();
     protected void Update()
     {
         if (!GameManager.isPlaying || GameManager.isPaused || GameManager.playerCharacter != this)
@@ -237,6 +231,40 @@ public abstract class Character<NormalAtkCls, SkillCls, ChildCls> : CharacterBas
     public NormalAtkCls normalAtkSkill => _normalAtkSkill;
     protected SkillCls _specialSkill;
     public SkillCls specialSkill => _specialSkill;
+
+    protected override void attackAndSkillControl()
+    {
+        if (!_invisible)
+        {
+            if (Input.GetKeyDown(KeyCode.Q))
+            {
+                if (specialSkill != null && specialSkill.energyConsume <= energy)
+                {
+                    if (specialSkill.releaseType == SkillReleaseType.Immediate)
+                    {
+                        specialSkill.use(); //energy is consumed in the use method
+                    }
+                    else if (specialSkill.releaseType == SkillReleaseType.PressAndClick && !specialSkill.prepared)
+                    {
+                        specialSkill.prepare(); //energy is consumed in the prepare method
+                    }
+                }
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (specialSkill != null && specialSkill.releaseType == SkillReleaseType.PressAndClick && specialSkill.prepared)
+                {
+                    switchAnimation(CharacterAnimation.SKILL);
+                    specialSkill.use();
+                }
+                else if (normalAtkSkill != null)
+                {
+                    switchAnimation(CharacterAnimation.ATTACK);
+                    normalAtkSkill.use();
+                }
+            }
+        }
+    }
 
     void Awake()
     {
