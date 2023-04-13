@@ -15,10 +15,18 @@ const App = () => {
   const [blogcontent, setBlogcontent] = React.useState('');
 
   useEffect(() => {
-      axios.get('http://localhost:3000/api/blog').then(res => {
-        setBlogList(res.data);
-      })}
-    ,[])
+    axios.get('http://localhost:3000/api/blog')
+      .then(res => {
+        // Sort the blog list in descending order based on the creation date
+        const sortedList = res.data.sort((a, b) => {
+          return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+        setBlogList(sortedList);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, []);
 
   const names = [];
   const author=[];
