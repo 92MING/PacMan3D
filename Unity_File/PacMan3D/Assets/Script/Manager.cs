@@ -31,16 +31,11 @@ public class ManagerBase: MonoBehaviour
 public class Manager<Cls> : ManagerBase where Cls : Manager<Cls>, new()
 {
     protected static Cls _instance = null;
-    public static Cls instance
+    public static Cls instance => _instance;
+    
+    protected virtual void Awake()
     {
-        get
-        {
-            if (_instance is null) _instance = new Cls();
-            return _instance;
-        }
-    }
-    protected void Awake()
-    {
-        _instance = this as Cls;
+        if (_instance is null) _instance = this as Cls;
+        else Destroy(gameObject);
     }  
 } 

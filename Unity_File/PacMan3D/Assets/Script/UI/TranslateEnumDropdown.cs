@@ -13,7 +13,7 @@ public class TranslateEnumDropdown<Enum> : Dropdown where Enum : System.Enum
     public string currentChoiceKey => _keys[value];
     public string currentChoiceText => options[value].text;
 
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         SystemManager.OnLanguageChanged.AddListener((lang) => { updateOptionTexts(); });

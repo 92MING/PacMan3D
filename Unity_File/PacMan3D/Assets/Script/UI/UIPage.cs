@@ -13,7 +13,7 @@ public abstract class UIPage : MonoBehaviour
     public UnityEvent<float> OnSwitching = new UnityEvent<float>();
 
     private CanvasGroup _canvasGroup;
-    protected void Awake()
+    protected virtual void Awake()
     {
         if (!TryGetComponent(out _canvasGroup))
         {

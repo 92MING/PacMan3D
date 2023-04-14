@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AboutPage : UIPage
 {
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.aboutPage = this;

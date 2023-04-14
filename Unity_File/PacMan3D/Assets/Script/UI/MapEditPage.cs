@@ -41,7 +41,7 @@ public class MapEditPage : UIPage
     IMongoDatabase database;
     IMongoCollection<BsonDocument> collection;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.mapEditPage = this;
@@ -79,12 +79,8 @@ public class MapEditPage : UIPage
         //TODO: Unlock this when UploadFile done
         //StartCoroutine(UploadFile());
 
-        GameMap gameMap = new GameMap();
+        GameMap gameMap = new GameMap(id: "0", name: "no Name", mapSize: new Vector2Int(20, 20), creatorID: null);
         //TODO
-        gameMap.id = "0"; 
-        gameMap.createrID = null;
-        gameMap.name = "no Name";
-        gameMap.mapSize = new Vector2Int(20, 20);
         gameMap.mapCells = new MapComponent [20,20];
 
         int count = 0;
@@ -146,6 +142,7 @@ public class MapEditPage : UIPage
         selectArrowTransform.position = button.transform.position + new Vector3(70f, 0, 0);
     }
 
+    /*
     IEnumerator UploadFile()
     {
         WWWForm form = new WWWForm();
@@ -170,4 +167,5 @@ public class MapEditPage : UIPage
             }
         }
     }
+    */
 }

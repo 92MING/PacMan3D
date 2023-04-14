@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2207725944884332630}
   - component: {fileID: 7755341099043381335}
   - component: {fileID: 1734886823568575762}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Slime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -83,9 +83,57 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4007434812673971089}
     m_Modifications:
+    - target: {fileID: 100000, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100004, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100006, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100008, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100010, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100012, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100014, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100016, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 100018, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
       propertyPath: m_Name
       value: SlimeMeshPBR
+      objectReference: {fileID: 0}
+    - target: {fileID: 100018, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100020, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 100022, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400018, guid: 032e9c3d6b8f7bd4281b52741574f3af, type: 3}
       propertyPath: m_RootOrder

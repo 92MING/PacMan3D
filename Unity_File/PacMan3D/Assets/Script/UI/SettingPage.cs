@@ -16,7 +16,7 @@ public class SettingPage : UIPage
     [SerializeField] private Text _langDropdown_itemText;
     [SerializeField] private GameObject _langDropdown_object;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.settingPage = this;
