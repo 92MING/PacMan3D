@@ -79,7 +79,8 @@ public class MapEditPage : UIPage
         //TODO: Unlock this when UploadFile done
         //StartCoroutine(UploadFile());
 
-        GameMap gameMap = new GameMap(id: "0", name: "no Name", mapSize: new Vector2Int(20, 20), creatorID: null);
+        string id = NetworkManager.DownloadDataToDB(collectionName).Count.ToString();
+        GameMap gameMap = new GameMap(id: id, name: "no Name", mapSize: new Vector2Int(20, 20), creatorID: null);
         //TODO
         gameMap.mapCells = new MapComponent [20,20];
 
@@ -89,45 +90,61 @@ public class MapEditPage : UIPage
             MapBox mapBox = child.GetComponent<MapBox>();
             MapElement mapElement = mapBox.mapElement;
 
-            MapComponent mapCellJson = new MapComponent();
-            mapCellJson.type = (MapObjectType) 2;
-            mapCellJson.objName = "MetalWall1";
-            mapCellJson.direction = 0;
-            mapCellJson.pos = Vector2Int.zero;
+            MapComponent mapCellJson = new MapComponent((MapObjectType) 2, Vector2Int.zero, 0, "MetalWall1", null);
+            int type = 2;
+            string objName = "MetalWall1";
 
             if (mapElement == MapElement.Wall1)
             {
                 mapCellJson.type = (MapObjectType) 2;
                 mapCellJson.objName = "MetalWall1";
+
+                type = 2;
+                objName = "MetalWall1";
             }
-            if (mapElement == MapElement.Wall2)
+            else if (mapElement == MapElement.Wall2)
             {
                 mapCellJson.type = (MapObjectType) 2;
                 mapCellJson.objName = "MetalWall2";
+
+                type = 2;
+                objName = "MetalWall2";
             }
-            if (mapElement == MapElement.Player)
+            else if (mapElement == MapElement.Player)
             {
                 mapCellJson.type = (MapObjectType)4;
                 mapCellJson.objName = "smile"; //TODO
+
+                type = 4;
+                objName = "smile";
             }
-            if (mapElement == MapElement.Monster)
+            else if (mapElement == MapElement.Monster)
             {
                 mapCellJson.type = (MapObjectType) 3;
                 mapCellJson.objName = "monster";//TODO
+
+                type = 3;
+                objName = "monster";
             }
             else
             {
                 mapCellJson.type = (MapObjectType) 1;
-                mapCellJson.objName = "floor";//TODO
+                mapCellJson.objName = "Floor";
+
+                type = 1;
+                objName = "Floor";
             }
 
-            gameMap.mapCells[count / 20, count % 20] = mapCellJson; //TODO: some error here [Null reference]
+            gameMap.mapCells[count / 20, count % 20] = new MapComponent((MapObjectType) type, Vector2Int.zero, 0, objName, null);
+            
 
             count++;
         }
 
         string jsonStr = gameMap.serialize().jsonStr();
-
+        jsonStr = JsonUtility.ToJson(gameMap.serialize());
+        Debug.Log($"{jsonStr}");
+          
         NetworkManager.UploadDataToDB(collectionName, jsonStr);
     }
 
