@@ -74,6 +74,11 @@ public class NetworkManager : Manager<NetworkManager>
         return outputJsons;
     }
 
+    public static List<string> DownloadAllMap()
+    {
+        return DownloadDataToDB("maps");
+    }
+
    
 
 

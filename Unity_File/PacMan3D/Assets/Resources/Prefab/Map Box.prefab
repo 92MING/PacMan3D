@@ -139,4 +139,4 @@ MonoBehaviour:
   wall1Sprite: {fileID: 21300000, guid: c65846d12a4fe574391bac779687d07e, type: 3}
   wall2Sprite: {fileID: 21300000, guid: 4b052577dd7570c4eafdda005fa46682, type: 3}
   playerSprite: {fileID: 21300000, guid: d9ab620fa72c131458aee4932fb9d6d4, type: 3}
-  monsterSprite: {fileID: 21300000, guid: 8819c3563d472bd43b78dfcd76927d77, type: 3}
+  monsterSprite: {fileID: 21300000, guid: 485bf7377bb50f94ca6b133bbd61d55d, type: 3}
