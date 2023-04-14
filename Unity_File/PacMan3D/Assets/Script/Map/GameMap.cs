@@ -156,6 +156,7 @@ public class GameMap
             newCell.direction = (int)cell.direction;
             newCell.objName = cell.objName;
             newCell.material = cell.materialName;
+            jsonMap.mapCells[count] = newCell;
             count++;
         }
         return jsonMap;

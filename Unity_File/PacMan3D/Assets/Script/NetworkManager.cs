@@ -63,13 +63,11 @@ public class NetworkManager : Manager<NetworkManager>
         IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>(collectionName);
 
         var doc = collection.Find(new BsonDocument()).ToList();
-        Debug.Log(doc.Count);
 
         List<string> outputJsons = new List<string> { };
 
         foreach (BsonDocument document in doc)
         {
-            Debug.Log(document.ToString());
             outputJsons.Add(document.ToJson());
         }
 
