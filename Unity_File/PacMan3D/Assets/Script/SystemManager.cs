@@ -31,6 +31,7 @@ public class SystemManager : Manager<SystemManager>
         {
             translateWord = key;
         }
+        if (translateWord == "") translateWord = key;
         return result;
     }
 

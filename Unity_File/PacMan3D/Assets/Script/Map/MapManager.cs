@@ -18,9 +18,18 @@ public class MapManager : Manager<MapManager>
 
     private static GameMap _currentMap = null; //当前地图
     public static GameMap currentMap => _currentMap;
-    private static MapObjectBase[,] _mapCells; //目前地图的所有Cell
-    public static MapObjectBase currentPlayerRebornCell => GetMapCellAt(currentMap.playerRebornPos);
+    private static MapObject[,] _mapCells; //目前地图的所有Cell
+    public static MapObject currentPlayerRebornCell => GetMapCellAt(currentMap.playerRebornPos);
     public static GameObject currentPlayerRebornCellObj => GetMapCellObjAt(currentMap.playerRebornPos);
+    public static int maxCoinNumForCurrentMap
+    {
+        get
+        {
+            if (!GameManager.isPlaying) return 0;
+            if (MapManager.currentMap is null) return 0;
+            return MapManager.currentMap.emptyMapCellCount / 3;
+        }
+    }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     private static void LoadAllLocalMaps()
@@ -41,7 +50,7 @@ public class MapManager : Manager<MapManager>
     /// </summary>
     /// <param name="pos"></param>
     /// <returns></returns>
-    public static MapObjectBase GetMapCellAt(Vector2Int pos)
+    public static MapObject GetMapCellAt(Vector2Int pos)
     {
         if (currentMap is null) return null;
         else if (pos.x < 0 || pos.y < 0 || pos.x >= currentMap.mapSize.x || pos.y >= currentMap.mapSize.y) return null; // out of map
@@ -60,26 +69,24 @@ public class MapManager : Manager<MapManager>
     /// <param name="forceUpdate"> update even this map has loaded </param>
     /// <param name="addToAllMap"> add to MapManager.AllMaps </param>
     /// <returns>GameMap</returns>
-    public static GameMap LoadMapFromJson(string json, bool forceUpdate=false, bool addToAllMap=true){
+    public static GameMap LoadMapFromJson(string json, bool forceUpdate=false, bool addToAllMap=true)
+    {    
         MapJson mapJson = JsonUtility.FromJson<MapJson>(json);
         if (AllMaps.ContainsKey(mapJson.id) && !forceUpdate) return null; // map alreaedy loaded
-        GameMap newMap = new GameMap();
-        newMap.id = mapJson.id;
-        newMap.createrID = mapJson.id;
-        newMap.name = mapJson.name;
+        
         var sizeStr = mapJson.mapSize.Split('x');
-        newMap.mapSize = new Vector2Int(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
-        newMap.mapCells = new MapComponent[(int)newMap.mapSize.x, (int)newMap.mapSize.y];
+        var size = new Vector2Int(int.Parse(sizeStr[0]), int.Parse(sizeStr[1]));
+        GameMap newMap = new GameMap(mapJson.id, mapJson.name, size, mapJson.creatorID);
+        
         int count = 0;
         foreach (var cell in mapJson.mapCells){
-            var newCell = new MapComponent();
-            newCell.type = (MapObjectType)cell.type;
-            newCell.direction = (MapObjectDirection)cell.direction;
-            newCell.objName = cell.objName;
-            newCell.pos = new Vector2Int(count % newMap.mapSize.x, count / newMap.mapSize.x);
-            newMap.mapCells[count % newMap.mapSize.x, count / newMap.mapSize.x] = newCell;
+            var comp = new MapComponent((MapObjectType)cell.type, new Vector2Int(count % newMap.mapSize.x, count / newMap.mapSize.x), (MapObjectDirection)cell.direction, cell.objName, cell.material);
+            if (comp.materialName == "") comp.materialName = null;
+            if (comp.objName == "") comp.objName = null;
+            newMap.mapCells[count % newMap.mapSize.x, count / newMap.mapSize.x] = comp;
             count++;
         }
+        
         if (addToAllMap) AllMaps.Add(newMap.id, newMap);
         return newMap;
     }
@@ -95,17 +102,10 @@ public class MapManager : Manager<MapManager>
     public static GameMap CreateTempMap(Vector2Int mapSize, string mapName=null, string creatorID =null)
     {
         //create a new map
-        GameMap newMap = new GameMap();
-        newMap.id = null;
-        newMap.createrID = creatorID;
-        newMap.name = mapName;
-        newMap.mapSize = mapSize;
-        newMap.mapCells = new MapComponent[(int)mapSize.x, (int)mapSize.y];
+        GameMap newMap = new GameMap(null, mapName, mapSize, creatorID);
         for (int i = 0; i < mapSize.x * mapSize.y; i++)
         {
-            var component = new MapComponent();
-            component.type = MapObjectType.EMPTY;
-            newMap.mapCells[i % mapSize.x, i / mapSize.x] = component;
+            newMap.mapCells[i % mapSize.x, i / mapSize.x] = new MapComponent(MapObjectType.EMPTY, new Vector2Int(i % mapSize.x, i / mapSize.x));
         }
         return newMap;
     }
@@ -138,12 +138,14 @@ public class MapManager : Manager<MapManager>
         if (currentMap != null && !replaceCurrent) return;
         DestroyCurrentMap();
         _currentMap = map;
-        _mapCells = new MapObjectBase[map.mapSize.x, map.mapSize.y];
+        _mapCells = new MapObject[map.mapSize.x, map.mapSize.y];
         int count = 0;
         foreach (var cell in map.mapCells)
         {
-            var newCell = MapObjectBase.Create(cell.objName, new Vector2Int(count % map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize);
-            _mapCells[count % map.mapSize.x, count / map.mapSize.x] = newCell;
+            if (cell.type != MapObjectType.NULL && cell.objName!=null)
+            {
+                _mapCells[count % map.mapSize.x, count / map.mapSize.x] = MapObject.Create(cell.objName, new Vector2Int(count % map.mapSize.x, count / map.mapSize.x), cell.direction, map.mapSize, cell.materialName);
+            }
             count++;
         }
     }
@@ -158,7 +160,20 @@ public class MapManager : Manager<MapManager>
         _mapCells = null;
         foreach (Transform child in mapObj.transform)
         {
-            Destroy(child.gameObject);
+            child.GetComponentInChildren<MapObject>().ReturnToPool();
         }
+    }
+
+    public static List<MapObject> AllGenerateCoinMapObjs()
+    {
+        var lst = new List<MapObject>();
+        foreach (var obj in _mapCells)
+        {
+            if (obj.GetType().IsSubclassOf(typeof(GenerateCoinMapObject<>)))
+            {
+                lst.Add(obj);
+            }
+        }
+        return lst;
     }
 }

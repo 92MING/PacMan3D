@@ -52,9 +52,24 @@ public class MapComponent
 {
     public MapObjectType type;
     public string objName = null; // specific object name, eg "Wall", "Monster1"
-    public MapObjectDirection direction;
+    public MapObjectDirection direction = MapObjectDirection.UP;
     public Vector2Int pos;
+    public string materialName = null;
 
+    public MapComponent() { }
+    public MapComponent(MapObjectType type, Vector2Int pos, MapObjectDirection direction = MapObjectDirection.UP, string objName=null, string materialName=null) 
+    {
+        this.type = type;
+        this.pos = pos;
+        this.direction = direction;
+        this.objName = objName;
+        this.materialName = materialName;
+    }
+    
+    public Vector3 GetMapCellRealPosition(Vector2 mapSize)
+    {
+        return GetMapCellPositionByMapPos(pos, mapSize);
+    }
     public static Vector3 GetMapCellPositionByMapPos(Vector2Int mapPos, Vector2 mapSize)
     {
         var pos = new Vector3(mapPos.x - mapSize.x / 2.0f, 0, mapPos.y - mapSize.y / 2.0f);
@@ -66,13 +81,41 @@ public class MapComponent
 [System.Serializable]
 public class GameMap
 {
+    public GameMap() { }
+    public GameMap(string id, string name, Vector2Int mapSize, string creatorID = null)
+    {
+        this.id = id;
+        this.name = name;
+        this.mapSize = mapSize;
+        this.creatorID = creatorID;
+        this.mapCells = new MapComponent[(int)mapSize.x, (int)mapSize.y];
+    }
+    
     public string id = null;
-    public string createrID;
+    public string creatorID;
     public string name;
     
     public Vector2Int mapSize;
     public int mapCellCount => mapSize.x * mapSize.y;
+    public int emptyMapCellCount
+    {
+        get
+        {
+            if (mapCells is null) return 0;
+            int count = 0;
+            foreach (var cell in mapCells) if (cell.type == MapObjectType.EMPTY) count++;
+            return count;
+        }
+    }
     public MapComponent[,] mapCells; //x,y
+    public Rect realBoundary
+    {
+        get
+        {
+            var cornerPos = mapCells[0, 0].GetMapCellRealPosition(mapSize);
+            return new Rect(new Vector2(cornerPos.x, cornerPos.z), (Vector2)mapSize * MapManager.mapScale);
+        }
+    }
     
     private Vector2Int? _playerRebornPos = null; //玩家重生点是唯一的
     public Vector2Int playerRebornPos
@@ -102,7 +145,7 @@ public class GameMap
         var jsonMap = new MapJson();
         jsonMap.id = id;
         jsonMap.name =name;
-        jsonMap.creatorID = createrID;
+        jsonMap.creatorID = creatorID;
         jsonMap.mapSize = string.Format("{0}x{1}", mapSize.x, mapSize.y);
         jsonMap.mapCells = new MapCellJson[(int)mapSize.x * (int)mapSize.y];
         int count = 0;
@@ -112,6 +155,7 @@ public class GameMap
             newCell.type = (int)cell.type;
             newCell.direction = (int)cell.direction;
             newCell.objName = cell.objName;
+            newCell.material = cell.materialName;
             count++;
         }
         return jsonMap;
@@ -127,6 +171,7 @@ public class MapCellJson
     public int type;
     public string objName;
     public int direction;
+    public string material=null;
 }
 
 /// <summary>

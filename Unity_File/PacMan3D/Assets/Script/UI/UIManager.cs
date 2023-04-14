@@ -45,7 +45,7 @@ public class UIManager : Manager<UIManager>
     private static InGameUI inGameUI;
     private static bool _inGameMode = false;
 
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         _UIObject = Instantiate(ResourcesManager.GetPrefab("UIPrefab"));
@@ -59,6 +59,7 @@ public class UIManager : Manager<UIManager>
         }
 
         inGameUIObj = Instantiate(ResourcesManager.GetPrefab("InGameUI"));
+        inGameUIObj.SetActive(false);
         inGameUIObj.name = "InGameUI";
         inGameUI = inGameUIObj.GetComponent<InGameUI>();
     }
@@ -185,6 +186,7 @@ public class UIManager : Manager<UIManager>
         if (_inGameMode) return;
         _UIObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);
+        inGameUI.enterGameMode(GameManager.allCurrentChars.ToArray());
         _inGameMode = true;
     }
     public static void exitGameMode()

@@ -8,14 +8,14 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Character
   - Water
   - UI
   - StaticObj
-  - 
-  - 
-  - 
-  - 
+  - BombCollider
+  - BombTrigger
+  - BulletTrigger
+  - Coin
   - 
   - 
   - 

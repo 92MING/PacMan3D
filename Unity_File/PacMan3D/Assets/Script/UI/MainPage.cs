@@ -16,7 +16,7 @@ public class MainPage : UIPage
     public Button Honor_Button;
     public Button About_Button;
     
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.mainPage = this;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MapEditPage : UIPage
 {
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.mapEditPage = this;

@@ -28,7 +28,7 @@ public class CharacterPage : UIPage
     [SerializeField] private Button nextCharacterButton;
     [SerializeField] private Button tryButton;
 
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.characterPage = this;

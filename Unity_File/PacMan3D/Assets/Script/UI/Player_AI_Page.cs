@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Player_AI_Page : UIPage
 {
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.playerAIPage = this;
