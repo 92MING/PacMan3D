@@ -158,8 +158,9 @@ public class MapManager : Manager<MapManager>
         if (currentMap is null) return;
         _currentMap = null;
         _mapCells = null;
-        foreach (Transform child in mapObj.transform)
+        for (int i=mapObj.transform.childCount-1; i>=0; i--)
         {
+            var child = mapObj.transform.GetChild(i);
             child.GetComponentInChildren<MapObject>().ReturnToPool();
         }
     }

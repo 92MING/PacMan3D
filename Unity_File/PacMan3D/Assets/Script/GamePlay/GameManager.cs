@@ -187,7 +187,7 @@ public class GameManager: Manager<GameManager>
             return;
         }
 
-        EnterGameMode(MapManager.testMap, character, null, null, false);
+        EnterGameMode(MapManager.testMap, character, null, null, true);
     }
     public static void TryCharacter<CharCls>() where CharCls: CharacterBase
     {

@@ -149,7 +149,12 @@ public abstract class CharacterBase : MonoBehaviour
     }
     protected void enableAnimator()
     {
-        GetComponentInChildren<Animator>().speed = 1;
+        IEnumerator WaitAndStopAnimation(Animator animator)
+        {
+            yield return null; // 等待一帧的时间
+            animator.speed = 1f; // 将当前动画的速度设置为0
+        }
+        StartCoroutine(WaitAndStopAnimation(GetComponentInChildren<Animator>()));
     }
     protected void Update()
     {
@@ -171,7 +176,7 @@ public abstract class CharacterBase : MonoBehaviour
     }
     protected void FixedUpdate()
     {
-        if (GameManager.isPlaying && !GameManager.isPaused)
+        if (GameManager.isPlaying && !GameManager.isPaused && !_died)
         {
             //更新位置与动画
             if (_currentInput.x > 0.2f || _currentInput.x < -0.2f || _currentInput.y > 0.2f || _currentInput.y < -0.2f)
@@ -206,6 +211,7 @@ public abstract class CharacterBase : MonoBehaviour
     }
     protected virtual void basicMovementControl()
     {
+        if (_died) return;
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
         _currentInput = new Vector2(h, v);
@@ -214,6 +220,7 @@ public abstract class CharacterBase : MonoBehaviour
     }
     protected virtual void jumpControl()
     {
+        if (_died) return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (touchingFloor) rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
@@ -222,6 +229,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected abstract void attackAndSkillControl();
     public void switchAnimation(CharacterAnimation ani)
     {
+        if (_died) return;
         if (ani == currentAni) return;
         _animator.SetInteger("state", (int)ani);
         _currentAni = ani;
@@ -285,11 +293,34 @@ public abstract class CharacterBase : MonoBehaviour
     }
     public virtual void reborn()
     {
-        //TODO    
+        hp = maxHP;
+        _died = false;
+        GetComponentInChildren<Renderer>().enabled = true;
+        foreach (var col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = true;
+        }
+        enterGameMode();
+        placeAtMapCell(MapManager.currentMap.playerRebornPos);
     }
+
+    protected bool _died = false;
     public virtual void die(CharacterBase killer) 
-    { 
-        //TODO
+    {
+        switchAnimation(CharacterAnimation.DIE);
+        GetComponentInChildren<Renderer>().enabled = false;
+        foreach (var col in GetComponentsInChildren<Collider>())
+        {
+            col.enabled = false;
+        }
+        exitGameMode();
+        _died = true;
+        IEnumerator wait()
+        {
+            yield return new WaitForSeconds(4f);
+            reborn();
+        }
+        StartCoroutine(wait());
     }
     
     protected void OnCollisionEnter(Collision collision)

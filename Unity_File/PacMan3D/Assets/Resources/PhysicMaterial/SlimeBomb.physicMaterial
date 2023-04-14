@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: SlimeBomb
   dynamicFriction: 0.5
   staticFriction: 0.5
-  bounciness: 0.7
+  bounciness: 0
   frictionCombine: 1
   bounceCombine: 3

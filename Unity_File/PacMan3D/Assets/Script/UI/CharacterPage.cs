@@ -69,7 +69,12 @@ public class CharacterPage : UIPage
             _showingCharObj = null;
         });
     }
-
+    public void resetShowCharPos()
+    {
+        if (showingChar is null) return;
+        showingChar.transform.position = CharacterMiddlePos;
+        _showingCharObj.transform.LookAt(GameManager.gameCamera.transform);
+    }
     public void switchNextCharacter()
     {
         var currentIndex = showingCharIndex;
