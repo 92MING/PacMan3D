@@ -73,7 +73,7 @@ public abstract class BulletBase<ExplosionCls, ChildCls>: PoolMonoObject
         {
             _rigidbody.useGravity = useGravity;
             _rigidbody.isKinematic = false;
-            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
+            _rigidbody.constraints = constaints;
         }
     }
     protected void DeactivePhysics()
@@ -82,7 +82,7 @@ public abstract class BulletBase<ExplosionCls, ChildCls>: PoolMonoObject
         {
             _rigidbody.useGravity = false;
             _rigidbody.isKinematic = true;
-            _rigidbody.constraints = constaints;
+            _rigidbody.constraints = RigidbodyConstraints.FreezeAll;
         }
     }
 

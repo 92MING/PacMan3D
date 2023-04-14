@@ -181,12 +181,12 @@ public class UIManager : Manager<UIManager>
         _switchPage(_prevPage, SwitchMode.RETURN);
     }
 
-    public static void enterGameMode()
+    public static void enterGameMode(bool countTime = true, int timeLimit = 0)
     {
         if (_inGameMode) return;
         _UIObject.SetActive(false);
         inGameUI.gameObject.SetActive(true);
-        inGameUI.enterGameMode(GameManager.allCurrentChars.ToArray());
+        inGameUI.enterGameMode(GameManager.allCurrentChars.ToArray(), countTime, timeLimit);
         _inGameMode = true;
     }
     public static void exitGameMode()

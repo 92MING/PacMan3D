@@ -17,9 +17,7 @@ public class Player_AI_Page : UIPage
 
     public List<Sprite> mapPreviewSpriteList;
 
-    public GameObject charObj;
-
-    private void Awake()
+    protected override void Awake()
     {
         base.Awake();
         UIManager.playerAIPage = this;
@@ -27,9 +25,9 @@ public class Player_AI_Page : UIPage
         previousButton.onClick.AddListener(() => PreviousButtonFunction());
         nextButton.onClick.AddListener(() => NextButtonFunction());
 
-        charObj = Instantiate(ResourcesManager.GetPrefab(CharacterBase.AllCharacterType.First.Value.Name));
+        //charObj = Instantiate(ResourcesManager.GetPrefab(CharacterBase.AllCharacterType.First.Value.Name));
 
-        mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, 1));
+        //mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, 1));
     }
 
     private void PreviousButtonFunction()
@@ -41,7 +39,7 @@ public class Player_AI_Page : UIPage
         mapPreviewImage.sprite = mapPreviewSpriteList[pageIndex];
         mapNameText.text = $"Map {pageIndex + 1}";
         mapPreviewImage.transform.GetComponent<Button>().onClick.RemoveAllListeners();
-        mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, pageIndex + 1));
+        //mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, pageIndex + 1));
     }
     private void NextButtonFunction()
     {
@@ -52,7 +50,7 @@ public class Player_AI_Page : UIPage
         mapPreviewImage.sprite = mapPreviewSpriteList[pageIndex];
         mapNameText.text = $"Map {pageIndex + 1}";
         mapPreviewImage.transform.GetComponent<Button>().onClick.RemoveAllListeners();
-        mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, pageIndex + 1));  
+        //mapPreviewImage.transform.GetComponent<Button>().onClick.AddListener(() => GameManager.TryCharacter(charObj, pageIndex + 1));  
     }
 }
 

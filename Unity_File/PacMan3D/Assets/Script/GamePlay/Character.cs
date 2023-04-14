@@ -130,6 +130,26 @@ public abstract class CharacterBase : MonoBehaviour
         _rigidbody.mass = 1.0f;
         _animator = GetComponentInChildren<Animator>();
         _hp = maxHP;
+        GameManager.OnGamePause.AddListener(disableAnimator);
+        GameManager.OnGamePause.AddListener(enableAnimator);
+    }
+    protected virtual void OnDestroy()
+    {
+        GameManager.OnGamePause.RemoveListener(disableAnimator);
+        GameManager.OnGamePause.RemoveListener(enableAnimator);
+    }
+    protected void disableAnimator()
+    {
+        IEnumerator WaitAndStopAnimation(Animator animator)
+        {
+            yield return null; // 等待一帧的时间
+            animator.speed = 0f; // 将当前动画的速度设置为0
+        }
+        StartCoroutine(WaitAndStopAnimation(GetComponentInChildren<Animator>()));
+    }
+    protected void enableAnimator()
+    {
+        GetComponentInChildren<Animator>().speed = 1;
     }
     protected void Update()
     {
@@ -255,7 +275,9 @@ public abstract class CharacterBase : MonoBehaviour
     }
     public virtual void takeDamage(int damage, CharacterBase comesFrom)
     {
-        hp -= damage;
+        var _damage = (damage - def);
+        if (_damage <= 0) _damage = 1;
+        hp -= _damage;
         if (hp == 0)
         {
             die(comesFrom);

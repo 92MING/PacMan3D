@@ -32,12 +32,13 @@ public class CharacterPage : UIPage
     {
         base.Awake();
         UIManager.characterPage = this;
-        prevCharacterButton.onClick.AddListener(switchNextCharacter);
-        nextCharacterButton.onClick.AddListener(switchPrevCharacter);
-        tryButton.onClick.AddListener(tryCharacter);
     }
     private void Start()
     {
+        prevCharacterButton.onClick.AddListener(switchPrevCharacter);
+        nextCharacterButton.onClick.AddListener(switchNextCharacter);
+        prevCharacterButton.gameObject.SetActive(false);
+        tryButton.onClick.AddListener(tryCharacter);
         OnEnter.AddListener(() =>
         {
             var firstCharacterType = CharacterBase.AllCharacterType.First.Value;
@@ -51,7 +52,9 @@ public class CharacterPage : UIPage
             atkText.text = characterComponent.atk.ToString();
             defText.text = characterComponent.def.ToString();
             spdText.text = characterComponent.spd.ToString();
-            nameText.text = firstCharacterType.Name;
+            string _name;
+            SystemManager.TryGetTranslation(firstCharacterType.Name, out _name);
+            nameText.text = _name;
         });
         OnSwitching.AddListener((progress) =>
         {
@@ -71,17 +74,49 @@ public class CharacterPage : UIPage
     {
         var currentIndex = showingCharIndex;
         if (currentIndex == CharacterBase.AllCharacterType.Count - 1) return;
+
+        prevCharacterButton.gameObject.SetActive(true);
+        if (currentIndex == CharacterBase.AllCharacterType.Count - 2)
+        {
+            nextCharacterButton.gameObject.SetActive(false);
+        }
+
         Destroy(showingCharObj);
         _showingCharObj = Instantiate(ResourcesManager.GetPrefab(CharacterBase.AllCharacterType.ElementAt(currentIndex + 1).Name));
         _showingCharObj.transform.position = CharacterMiddlePos;
+        _showingCharObj.transform.LookAt(GameManager.gameCamera.transform);
+        var characterComponent = _showingCharObj.GetComponent<CharacterBase>();
+        hpText.text = characterComponent.maxHP.ToString();
+        atkText.text = characterComponent.atk.ToString();
+        defText.text = characterComponent.def.ToString();
+        spdText.text = characterComponent.spd.ToString();
+        string _name;
+        SystemManager.TryGetTranslation(characterComponent.GetType().Name, out _name);
+        nameText.text = _name;
     }
     public void switchPrevCharacter()
     {
         var currentIndex = showingCharIndex;
         if (currentIndex == 0) return;
+
+        nextCharacterButton.gameObject.SetActive(true);
+        if (currentIndex == 1)
+        {
+            prevCharacterButton.gameObject.SetActive(false);
+        }
+
         Destroy(showingCharObj);
         _showingCharObj = Instantiate(ResourcesManager.GetPrefab(CharacterBase.AllCharacterType.ElementAt(currentIndex - 1).Name));
         _showingCharObj.transform.position = CharacterMiddlePos;
+        _showingCharObj.transform.LookAt(GameManager.gameCamera.transform);
+        var characterComponent = _showingCharObj.GetComponent<CharacterBase>();
+        hpText.text = characterComponent.maxHP.ToString();
+        atkText.text = characterComponent.atk.ToString();
+        defText.text = characterComponent.def.ToString();
+        spdText.text = characterComponent.spd.ToString();
+        string _name;
+        SystemManager.TryGetTranslation(characterComponent.GetType().Name, out _name);
+        nameText.text = _name;
     }
     
     public void tryCharacter()

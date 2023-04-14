@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SlimeBomb: BombBase<SmallExplosion, SlimeBomb> 
 {
-    public override int damage => 5;
+    public override int damage => 3;
 }
 
 public class SlimeNormalAttack : NormalAttackSkill<SlimeNormalAttack>

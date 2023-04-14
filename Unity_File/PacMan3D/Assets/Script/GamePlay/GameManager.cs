@@ -130,7 +130,7 @@ public class GameManager: Manager<GameManager>
     /// <param name="playerCharacter"></param>
     public static void Play(GameMap map, CharacterBase playerCharacter, CharacterBase[] enemyChars, CharacterBase[] allyChars)
     {
-        EnterGameMode(map, playerCharacter, enemyChars, allyChars);
+        EnterGameMode(map, playerCharacter, enemyChars, allyChars, true);
     }
     /// <summary>
     /// 暂停游戏（如果在游戏中）
@@ -142,6 +142,7 @@ public class GameManager: Manager<GameManager>
             Debug.LogWarning("Game is not playing, can't pause");
             return;
         }
+        _isPaused = true;
         foreach (var c in allCurrentChars)
         {
             c.exitGameMode();
@@ -156,6 +157,7 @@ public class GameManager: Manager<GameManager>
             Debug.LogWarning("Game is not playing, can't continue");
             return;
         }
+        _isPaused = false;
         foreach (var c in allCurrentChars)
         {
             c.enterGameMode();
@@ -185,23 +187,7 @@ public class GameManager: Manager<GameManager>
             return;
         }
 
-        EnterGameMode(MapManager.testMap, character, null, null);
-    }
-    public static void TryCharacter(GameObject charObj, int num)
-    {
-        if (charObj is null)
-        {
-            Debug.LogWarning("Character Gameobject is null! Cant try character!");
-            return;
-        }
-        if (!charObj.TryGetComponent<CharacterBase>(out var character))
-        {
-            Debug.LogWarning("No character on the gameobject! Cant try character!");
-            return;
-        }
-
-        //EnterGameMode(JsonUtility.FromJson<GameMap>(gameMapJson), character, null, null);
-        EnterGameMode(MapManager.AllMaps.TryGetValue(num.ToString(), out var map)? map: null, character, null, null);
+        EnterGameMode(MapManager.testMap, character, null, null, false);
     }
     public static void TryCharacter<CharCls>() where CharCls: CharacterBase
     {
@@ -212,7 +198,8 @@ public class GameManager: Manager<GameManager>
     /// <summary>
     /// 进入游戏模式，凡涉及进入游戏，最后都调用此方法
     /// </summary>
-    private static void EnterGameMode(GameMap map, CharacterBase playerCharacter, CharacterBase[] allyChars, CharacterBase[] enemyChars)
+    private static void EnterGameMode(GameMap map, CharacterBase playerCharacter, CharacterBase[] allyChars, CharacterBase[] enemyChars,
+        bool countTime=true, int timeLimit=90)
     {
         if (isPlaying)
         {
@@ -226,7 +213,7 @@ public class GameManager: Manager<GameManager>
 
         var allChars = allCurrentChars;
 
-        UIManager.enterGameMode(); //UI 切换到游戏模式
+        UIManager.enterGameMode(countTime, timeLimit); //UI 切换到游戏模式
         MapManager.LoadMapToGame(map); //加载地图
         HideMouseCursor();
 
