@@ -1,0 +1,24 @@
+.list-demo-action-layout .image-area {
+    width: 183px;
+    height: 119px;
+    border-radius: 2px;
+    text-overflow: ellipsis;
+  }
+  
+  .list-demo-action-layout .image-area img {
+    width: 100%;
+  }
+  
+  .list-demo-action-layout .arco-list-item-action .arco-icon {
+    margin: 0 4px;
+  }
+  
+  .demo
+    {
+      padding: 0 40px;
+      color: #282f38;
+      background-color: var(--color-bg-2);
+      border-radius: 2px 2px 0 0;
+  }
+
+  

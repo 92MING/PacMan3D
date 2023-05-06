@@ -1,0 +1,110 @@
+@keyframes anvil {
+    0% {
+      transform: scale(1) translateY(0px);
+      opacity: 0;
+      box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+    1% {
+      transform: scale(0.96) translateY(10px);
+      opacity: 0;
+      box-shadow: 0 0 0 rgba(241, 241, 241, 0);
+    }
+    100% {
+      transform: scale(1) translateY(0px);
+      opacity: 1;
+      box-shadow: 0 0 500px rgba(241, 241, 241, 0);
+    }
+  }
+.popup-content {
+    -webkit-animation: anvil 0.3s cubic-bezier(0.38, 0.1, 0.36, 0.9) forwards;
+    padding: 45px 30px 10px 30px;
+    height: 500px;
+    width: 300px;
+   border-radius: 2em;
+    align-content: center;
+    justify-content: center;
+   
+   
+    background-color: rgb(26, 25, 21);
+    box-shadow: 0px 14px 80px rgba(46, 10, 230, 0.2);
+  }
+  
+.home-page{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+    
+  }
+.home-page-btn{
+    border-radius:  2.5em;
+    height: 50px;
+    width: 150px;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+}
+.popup-menu-btn{
+    border-radius:  2.5em;
+    height: 50px;
+    width: 150px;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+  }
+
+.sound-control{
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+    align-content: center;
+  }
+
+.sound-control-btn{
+    height: 50px;
+    width: 150px;
+    border-radius: 2.5em;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+  }
+
+.about{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+.about-btn{
+    height: 50px;
+    width: 150px;
+    border-radius:  2.5em;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+  }
+.popup-quit{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+  }
+.popup-quit-btn{
+    height: 50px;
+    width: 150px;
+    border-radius: 2.5em;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+  }
+.goback{
+    align-content: center;
+    padding: 10px 10px 20px 10px;
+    text-align: center;
+    
+  }
+
+.goback-btn{
+    height: 50px;
+    width: 150px;
+    border-radius: 2.5em;
+    background-color: rgba(252, 236, 22, 0.959);
+    color: rgb(6, 6, 6);
+    font-weight: bold;
+  }
